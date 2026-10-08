@@ -169,7 +169,7 @@
             <!-- DETALLE: Alfabeto -->
             <div id="alphabet-detail" class="hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 space-y-4">
                 <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-700">
-                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-font mr-2"></i> Alfabeto Árabe (Las primeras 10 letras)</h3>
+                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-font mr-2"></i> Alfabeto Árabe (Primeras 10 letras)</h3>
                     <button onclick="toggleLessonDetail('alphabet-detail')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -295,9 +295,9 @@
             </div>
         </section>
 
-        <!-- 3. QUIZ SECTION (100 PREGUNTAS) -->
+        <!-- 3. QUIZ SECTION (100 PREGUNTAS CON PANTALLA DE RESULTADOS) -->
         <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
-            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
+            <div id="quizCard" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">Pregunta <span id="quizNum">1</span> de 100</span>
                     <span class="text-xs text-slate-400" id="quizScore">Puntos: 0</span>
@@ -306,8 +306,22 @@
                 <h3 id="quizQuestion" class="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">Cargando pregunta...</h3>
 
                 <div id="quizOptions" class="space-y-3">
-                    <!-- Dinámico -->
+                    <!-- Contenido dinámico -->
                 </div>
+            </div>
+
+            <!-- Pantalla Final al Completar Quiz -->
+            <div id="quizResultCard" class="hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 text-center shadow-lg space-y-4">
+                <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h3 class="text-2xl font-bold">¡Quiz Completado!</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Has respondido las 100 preguntas del módulo.</p>
+                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl max-w-xs mx-auto space-y-1">
+                    <p class="text-xs text-slate-400 font-semibold uppercase">Puntuación Final</p>
+                    <p id="finalScore" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">0 / 1000</p>
+                </div>
+                <button onclick="restartQuiz()" class="py-3 px-6 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm transition">Reiniciar Quiz</button>
             </div>
         </section>
 
@@ -399,7 +413,7 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        const PROXY_URL = "https://proyecto-sage-ten-57.vercel.app/api/chat";
+        const PROXY_URL = "/api/chat";
 
         const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
 Reglas de respuesta:
@@ -519,7 +533,7 @@ Reglas de respuesta:
             { arabic: 'عَرَفَ', phonetic: '\'Arafa', spanish: 'Saber / Conocer', context: 'Acción / Verbo.' }
         ];
 
-        // QUIZ EXPANDIDO A 100 PREGUNTAS
+        // QUIZ DE 100 PREGUNTAS CON OPCIONES DINÁMICAS Y VARIADAS
         const quizQuestions = [
             { q: "¿Qué significa la expresión 'شُكْرًا' (Shukran)?", options: ["1. Por favor", "2. Gracias", "3. Hola"], answer: 1 },
             { q: "¿Cuál es la respuesta adecuada a 'Shukran'?", options: ["1. 'Afwan (عَفْوًا)", "2. Marhaban (مَرْحَبًا)", "3. Ahlan (أَهْلًا)"], answer: 0 },
@@ -738,6 +752,16 @@ Reglas de respuesta:
         }
 
         function renderQuiz() {
+            if (currentQuizIndex >= quizQuestions.length) {
+                document.getElementById('quizCard').classList.add('hidden');
+                document.getElementById('quizResultCard').classList.remove('hidden');
+                document.getElementById('finalScore').innerText = `${quizScore} / ${quizQuestions.length * 10}`;
+                return;
+            }
+
+            document.getElementById('quizCard').classList.remove('hidden');
+            document.getElementById('quizResultCard').classList.add('hidden');
+
             const q = quizQuestions[currentQuizIndex];
             document.getElementById('quizNum').innerText = currentQuizIndex + 1;
             document.getElementById('quizScore').innerText = `Puntos: ${quizScore}`;
@@ -759,11 +783,14 @@ Reglas de respuesta:
             if (idx === q.answer) {
                 quizScore += 10;
                 addXP(10);
-                alert("¡Excelente! Respuesta Correcta (+10 XP)");
-            } else {
-                alert("Respuesta incorrecta. ¡Sigue practicando!");
             }
-            currentQuizIndex = (currentQuizIndex + 1) % quizQuestions.length;
+            currentQuizIndex++;
+            renderQuiz();
+        }
+
+        function restartQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
             renderQuiz();
         }
 
@@ -832,22 +859,13 @@ Reglas de respuesta:
         async function fetchGeminiResponse(userQuery) {
             chatHistory.push({ role: "user", parts: [{ text: userQuery }] });
 
-            const contents = [
-                {
-                    role: "user",
-                    parts: [{ text: SYSTEM_PROMPT }]
-                },
-                {
-                    role: "model",
-                    parts: [{ text: "¡Comprendido! Asumo mi rol como la Profesora Reham. Responderé con claridad, calidez y formato estructurado en árabe, fonética y español." }]
-                },
-                ...chatHistory.slice(-8)
-            ];
-
             const response = await fetch(PROXY_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ contents: contents })
+                body: JSON.stringify({ 
+                    userQuery: userQuery,
+                    history: chatHistory.slice(-8)
+                })
             });
 
             if (!response.ok) {
@@ -855,7 +873,7 @@ Reglas de respuesta:
             }
 
             const data = await response.json();
-            const textResult = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo obtener respuesta.";
+            const textResult = data.reply || "No se pudo obtener respuesta.";
 
             chatHistory.push({ role: "model", parts: [{ text: textResult }] });
 
