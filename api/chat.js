@@ -1,6 +1,5 @@
 // api/chat.js
 export default async function handler(req, res) {
-    // Cabeceras CORS de respaldo
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -20,7 +19,7 @@ export default async function handler(req, res) {
     const API_KEY = process.env.GEMINI_API_KEY; 
 
     if (!API_KEY) {
-        return res.status(500).json({ error: 'Variable GEMINI_API_KEY no configurada en Vercel.' });
+        return res.status(500).json({ error: 'GEMINI_API_KEY no configurada en Vercel.' });
     }
 
     try {
@@ -28,7 +27,7 @@ export default async function handler(req, res) {
         const { userQuery, history } = body || {};
 
         if (!userQuery) {
-            return res.status(400).json({ error: 'No se envió ninguna consulta' });
+            return res.status(400).json({ error: 'Consulta vacía' });
         }
 
         const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
