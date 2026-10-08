@@ -105,8 +105,12 @@
                 <button onclick="switchTab('dictionary')" id="tab-dictionary" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
                     <i class="fa-solid fa-book"></i> Diccionario
                 </button>
+                <!-- Nombre del Botón Cambiado de Asistente IA a Teacher Reham -->
                 <button onclick="switchTab('ai-tutor')" id="tab-ai-tutor" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i class="fa-solid fa-robot text-emerald-500"></i> Asistente IA
+                    <div class="w-5 h-5 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
+                        <img src="REHAM%20%20%D8%B1%D9%8A%D9%87%D8%A7%D9%85.jfif" alt="Teacher Reham" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-[9px] font-bold\'>ر</div>';">
+                    </div>
+                    Teacher Reham
                 </button>
             </nav>
 
@@ -748,7 +752,7 @@
             fullNumbers.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center border border-slate-200 dark:border-slate-700 hover:border-emerald-500 transition cursor-pointer';
-                div.onclick = () => speakText(item.ar.split('-')[1].trim());
+                div.onclick = () => speakText(item.ar);
                 div.innerHTML = `
                     <span class="text-lg font-bold arabic-text text-emerald-600 dark:text-emerald-400 block">${item.ar}</span>
                     <p class="font-semibold text-xs text-slate-500 dark:text-slate-300 mt-0.5">${item.phonetic}</p>
@@ -804,13 +808,36 @@
             renderFlashcard();
         }
 
+        // Limpia números arábigos e índicos para sintetizar voz limpia
+        function cleanAudioText(text) {
+            if (!text) return '';
+            let cleaned = text;
+            if (cleaned.includes('-')) {
+                cleaned = cleaned.split('-').pop();
+            }
+            return cleaned.replace(/[0-9\u0660-\u0669]/g, '').trim();
+        }
+
         function speakText(text) {
-            const txt = text || vocabulary[cardIndex].arabic;
+            const rawText = text || vocabulary[cardIndex].arabic;
+            const txt = cleanAudioText(rawText);
+
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
+                if (window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                }
+
                 const utterance = new SpeechSynthesisUtterance(txt);
                 utterance.lang = 'ar-SA';
                 utterance.rate = 0.85;
+
+                const voices = window.speechSynthesis.getVoices();
+                const arabicVoice = voices.find(v => v.lang.startsWith('ar'));
+                if (arabicVoice) {
+                    utterance.voice = arabicVoice;
+                }
+
                 window.speechSynthesis.speak(utterance);
             }
         }
@@ -931,7 +958,7 @@
         function getLessonAssistantResponse(msg) {
             const normMsg = normalizeText(msg);
 
-            // 1. PRIORIDAD: Búsqueda de Números si la consulta trae algún dígito
+            // 1. PRIORIDAD: Búsqueda de Números
             const numberMatches = normMsg.match(/\d+/);
             if (numberMatches) {
                 const val = parseInt(numberMatches[0]);
@@ -941,7 +968,7 @@
                 }
             }
 
-            // 2. Saludos o estados de ánimo
+            // 2. Saludos o estados conversacionales
             if (/\b(hola|buenas|marhaban|saludos)\b/.test(normMsg)) {
                 return `¡Marhaban! (مَرْحَبًا). ¿Cómo estás? Soy **Teacher Reham**. Puedes preguntarme cualquier palabra en español o árabe de tu curso.`;
             }
@@ -950,18 +977,18 @@
                 return `¡Me alegra mucho escucharlo! 😊 Recuerda que estoy aquí para ayudarte a repasar el alfabeto, los números o cualquier palabra del diccionario.`;
             }
 
-            // 3. Consultas generales sobre Alfabeto
+            // 3. Alfabeto
             if (/\b(alfabeto|letra|letras|alifato)\b/.test(normMsg)) {
                 const sample = fullAlphabet.slice(0, 5).map(a => `* **${a.letter}** (${a.name}): Sonido *${a.sound}*`).join('\n');
                 return `El alfabeto árabe cuenta con **28 letras**.\n\nAquí tienes las primeras 5 letras:\n${sample}\n\nPuedes consultar la lista completa en la sección **Lecciones**.`;
             }
 
-            // 4. Consultas generales sobre Números
+            // 4. Números
             if (/\b(numero|numeros|contar)\b/.test(normMsg)) {
                 return `Las lecciones incluyen todos los **números del 1 al 100** con sus correspondientes nombres en árabe y fonética. Puedes ver la lista completa en la pestaña **Lecciones**.`;
             }
 
-            // 5. Búsqueda de Vocabulario (Ignorando Stop Words como "el", "la", "de", "un")
+            // 5. Vocabulario (Filtro estricto contra Stop Words "el", "la", "de", "un")
             const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'es', 'de', 'en', 'se', 'dice', 'como', 'cual'];
             
             const vocabMatch = vocabulary.find(item => {
@@ -971,7 +998,7 @@
                 const esVariants = esNorm.split(/[\/\,\;\(\)]+/).map(s => s.trim()).filter(Boolean);
 
                 const matchesSpanish = esVariants.some(variant => {
-                    if (stopWords.includes(variant)) return false; // Evita que "el" coincida con "Él"
+                    if (stopWords.includes(variant)) return false;
                     const regex = new RegExp(`\\b${variant}\\b`, 'i');
                     return regex.test(normMsg);
                 });
