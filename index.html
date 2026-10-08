@@ -62,7 +62,7 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased transition-colors duration-200">
 
-    <!-- Header / Navegación Superior -->
+    <!-- Top Navigation Header -->
     <header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 glass-panel">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <!-- Botones de Navegación -->
+            <!-- Navigation Tabs -->
             <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
                 <button onclick="switchTab('lessons')" id="tab-lessons" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50">
                     <i class="fa-solid fa-book-open"></i> Lecciones
@@ -97,7 +97,7 @@
                 </button>
             </nav>
 
-            <!-- Estadísticas y Tema -->
+            <!-- Stats & Theme Toggle -->
             <div class="flex items-center space-x-3">
                 <div class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-700 dark:text-amber-300">
                     <i class="fa-solid fa-fire text-amber-500"></i>
@@ -115,10 +115,10 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
+    <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- 1. SECCIÓN LECCIONES -->
+        <!-- 1. LECCIONES SECTION -->
         <section id="sec-lessons" class="tab-content space-y-6">
             <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
                 <div class="relative z-10 max-w-xl">
@@ -164,7 +164,7 @@
             </div>
         </section>
 
-        <!-- 2. SECCIÓN TARJETAS (FLASHCARDS) -->
+        <!-- 2. FLASHCARDS SECTION -->
         <section id="sec-flashcards" class="tab-content hidden max-w-xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-2xl font-bold mb-1">Tarjetas de Vocabulario</h2>
@@ -192,7 +192,7 @@
             </div>
         </section>
 
-        <!-- 3. SECCIÓN QUIZ -->
+        <!-- 3. QUIZ SECTION -->
         <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
                 <div class="flex justify-between items-center mb-4">
@@ -203,12 +203,12 @@
                 <h3 id="quizQuestion" class="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">¿Qué significa la palabra "يا عُمري" (Ya Omri)?</h3>
 
                 <div id="quizOptions" class="space-y-3">
-                    <!-- Opciones dinámicas -->
+                    <!-- Dinámico -->
                 </div>
             </div>
         </section>
 
-        <!-- 4. SECCIÓN DICCIONARIO -->
+        <!-- 4. DICTIONARY SECTION -->
         <section id="sec-dictionary" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
                 <div class="relative w-full sm:w-96">
@@ -230,14 +230,14 @@
                             </tr>
                         </thead>
                         <tbody id="dictTableBody" class="divide-y divide-slate-200 dark:divide-slate-700 text-sm">
-                            <!-- Filas dinámicas -->
+                            <!-- Populated dynamically -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- 5. SECCIÓN IA TUTOR -->
+        <!-- 5. AI TUTOR SECTION -->
         <section id="sec-ai-tutor" class="tab-content hidden space-y-4">
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-md flex flex-col h-[650px]">
                 
@@ -270,7 +270,7 @@
                         </div>
                         <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
                             <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
-                            <p class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu profesora personal de árabe. La asistente de IA está lista. Puedes preguntarme cualquier duda sobre traducción, gramática o dialectos.</p>
+                            <p class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu profesora personal de árabe. Puedes preguntarme cualquier duda sobre traducción, gramática o dialectos.</p>
                         </div>
                     </div>
                 </div>
@@ -296,6 +296,17 @@
 
     <!-- JavaScript Application Logic -->
     <script>
+        // URL configurada de la función backend en Vercel
+        const PROXY_URL = "https://proyecto-sage-ten-57.vercel.app/api/chat";
+
+        const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
+Reglas de respuesta:
+1. Responde siempre en español fluido.
+2. Cada vez que incluyas una palabra o frase en árabe, pon la escritura en alfabeto árabe (con vocalización diacrítica/harakat cuando sea útil), seguida inmediatamente de su transliteración/pronunciación en fonética latina entre paréntesis o cursiva, y su traducción al español.
+3. Si el usuario pregunta por dialectos (marroquí, egipcio, levantino), explica amablemente la diferencia con el Árabe Estándar Moderno (Fusha).
+4. Mantén un tono cálido, alentador y profesional.
+5. Utiliza formato Markdown con negritas y viñetas para que la explicación sea fácil de leer.`;
+
         let chatHistory = [];
         let currentTab = 'lessons';
         let xp = parseInt(localStorage.getItem('reham_xp') || '0');
@@ -305,15 +316,105 @@
 
         const vocabulary = [
             { arabic: 'مَرْحَبًا', phonetic: 'Marhaban', spanish: 'Hola', context: 'Saludo formal y amigable común en todo el mundo árabe.' },
-            { arabic: 'أَهْلًا وَسَهْلًا', phonetic: 'Ahlan wa Sahlan', spanish: 'Bienvenido / Bienvenido seas', context: 'Expresión cálida de hospitalidad.' },
+            { arabic: 'أَهْلًا وَسَهْلًا', phonetic: 'Ahlan wa Sahlan', spanish: 'Bienvenido / Hola', context: 'Expresión cálida de hospitalidad.' },
+            { arabic: 'مَعَ السَّلَامَة', phonetic: 'Ma\'a as-salama', spanish: 'Adiós', context: 'Despedida estándar ("ve con paz").' },
             { arabic: 'شُكْرًا', phonetic: 'Shukran', spanish: 'Gracias', context: 'Palabra universal para dar las gracias.' },
-            { arabic: 'عَفْوًا', phonetic: 'Afwan', spanish: 'De nada / Por favor', context: 'Respuesta amable a Shukran.' },
-            { arabic: 'يا حَبيبي', phonetic: 'Ya Habibi', spanish: 'Mi amor (a hombre)', context: 'Expresión afectuosa masculina muy popular.' },
-            { arabic: 'يا حَبيبتي', phonetic: 'Ya Habibti', spanish: 'Mi amor (a mujer)', context: 'Expresión afectuosa femenina muy popular.' },
-            { arabic: 'يا عُمري', phonetic: 'Ya Omri', spanish: 'Mi vida', context: 'Demuestra afecto profundo ("eres mi vida").' },
-            { arabic: 'يا قَلبي', phonetic: 'Ya Qalbi', spanish: 'Mi corazón', context: 'Utilizado para expresar cariño sincero.' },
-            { arabic: 'نُور', phonetic: 'Nour', spanish: 'Luz / Resplandor', context: 'Nombre y concepto poético de guía y claridad.' },
-            { arabic: 'رِهَام', phonetic: 'Reham', spanish: 'Llovizna suave', context: 'Representa la lluvia fina y reconfortante.' }
+            { arabic: 'عَفْوًا', phonetic: '\'Afwan', spanish: 'De nada / Por favor', context: 'Respuesta amable a Shukran.' },
+            { arabic: 'نَعَمْ', phonetic: 'Na\'am', spanish: 'Sí', context: 'Afirmación.' },
+            { arabic: 'لَا', phonetic: 'La', spanish: 'No', context: 'Negación.' },
+            { arabic: 'مِنْ فَضْلِك', phonetic: 'Min fadlik', spanish: 'Por favor', context: 'Cortesía al pedir algo.' },
+            { arabic: 'آسِف', phonetic: 'Asif', spanish: 'Lo siento', context: 'Disculpa.' },
+            { arabic: 'حَسَنًا', phonetic: 'Hasanan', spanish: 'De acuerdo / Está bien', context: 'Aceptación o conformidad.' },
+            { arabic: 'صَبَاح الْخَيْر', phonetic: 'Sabah al-khayr', spanish: 'Buenos días', context: 'Saludo matutino.' },
+            { arabic: 'مَسَاء الْخَيْر', phonetic: 'Masa\' al-khayr', spanish: 'Buenas tardes', context: 'Saludo por la tarde o noche.' },
+            { arabic: 'لَيْلَة سَعِيدَة', phonetic: 'Layla sa\'ida', spanish: 'Buenas noches', context: 'Deseo de buena noche.' },
+            { arabic: 'كَيْفَ حَالُك؟', phonetic: 'Kayfa haluk?', spanish: '¿Cómo estás?', context: 'Pregunta sobre el estado de ánimo o salud.' },
+            { arabic: 'بِخَيْر', phonetic: 'Bi-khayr', spanish: 'Bien', context: 'Respuesta a ¿Cómo estás?' },
+            { arabic: 'مَا اسْمُك؟', phonetic: 'Masmuk?', spanish: '¿Cómo te llamas?', context: 'Pregunta sobre el nombre.' },
+            { arabic: 'اسْمِي...', phonetic: 'Ismi...', spanish: 'Mi nombre es...', context: 'Presentación personal.' },
+            { arabic: 'تَشَرَّفْنَا', phonetic: 'Tasharrafna', spanish: 'Mucho gusto', context: 'Expresión al conocer a alguien.' },
+            { arabic: 'أَيْنَ...؟', phonetic: 'Ayna...?', spanish: '¿Dónde está...?', context: 'Pregunta por ubicación.' },
+            { arabic: 'مَاذَا...؟', phonetic: 'Madha...?', spanish: '¿Qué...?', context: 'Pregunta sobre cosas o acciones.' },
+            { arabic: 'مَنْ...؟', phonetic: 'Man...?', spanish: '¿Quién...?', context: 'Pregunta por personas.' },
+            { arabic: 'لِمَاذَا...؟', phonetic: 'Limadha...?', spanish: '¿Por qué...?', context: 'Pregunta por causas o motivos.' },
+            { arabic: 'كَمْ...؟', phonetic: 'Kam...?', spanish: '¿Cuánto / Cuántos...?', context: 'Pregunta sobre cantidad.' },
+            { arabic: 'مَتَى...؟', phonetic: 'Mata...?', spanish: '¿Cuándo...?', context: 'Pregunta sobre tiempo.' },
+            { arabic: 'أَنَا', phonetic: 'Ana', spanish: 'Yo', context: 'Pronombre personal.' },
+            { arabic: 'أَنْتَ', phonetic: 'Anta', spanish: 'Tú (masculino)', context: 'Pronombre personal singular.' },
+            { arabic: 'أَنْتِ', phonetic: 'Anti', spanish: 'Tú (femenino)', context: 'Pronombre personal singular.' },
+            { arabic: 'هُوَ', phonetic: 'Huwa', spanish: 'Él', context: 'Pronombre personal singular.' },
+            { arabic: 'هِيَ', phonetic: 'Hiya', spanish: 'Ella', context: 'Pronombre personal singular.' },
+            { arabic: 'نَحْنُ', phonetic: 'Nahnu', spanish: 'Nosotros / Nosotras', context: 'Pronombre personal plural.' },
+            { arabic: 'أَنْتُمْ', phonetic: 'Antum', spanish: 'Vosotros / Vosotras / Ustedes', context: 'Pronombre personal plural.' },
+            { arabic: 'هُمْ', phonetic: 'Hum', spanish: 'Ellos / Ellas', context: 'Pronombre personal plural.' },
+            { arabic: 'هَذَا', phonetic: 'Hadha', spanish: 'Este / Esto', context: 'Demostrativo masculino.' },
+            { arabic: 'هَذِهِ', phonetic: 'Hadhihi', spanish: 'Esta', context: 'Demostrativo femenino.' },
+            { arabic: 'أُمّ', phonetic: 'Umm', spanish: 'Madre', context: 'Familia.' },
+            { arabic: 'أَب', phonetic: 'Ab', spanish: 'Padre', context: 'Familia.' },
+            { arabic: 'أَخ', phonetic: 'Akh', spanish: 'Hermano', context: 'Familia.' },
+            { arabic: 'أُخْت', phonetic: 'Ukht', spanish: 'Hermana', context: 'Familia.' },
+            { arabic: 'ابْن', phonetic: 'Ibn', spanish: 'Hijo', context: 'Familia.' },
+            { arabic: 'ابْنَة', phonetic: 'Ibna', spanish: 'Hija', context: 'Familia.' },
+            { arabic: 'عَائِلَة', phonetic: '\'A\'ila', spanish: 'Familia', context: 'Relación familiar.' },
+            { arabic: 'صَدِيق', phonetic: 'Sadiq', spanish: 'Amigo', context: 'Amistad.' },
+            { arabic: 'رَجُل', phonetic: 'Rajul', spanish: 'Hombre', context: 'Persona adulta masculina.' },
+            { arabic: 'امْرَأَة', phonetic: 'Imra\'a', spanish: 'Mujer', context: 'Persona adulta femenina.' },
+            { arabic: 'وَلَد', phonetic: 'Walad', spanish: 'Niño', context: 'Infante masculino.' },
+            { arabic: 'بِنْت', phonetic: 'Bint', spanish: 'Niña', context: 'Infante femenino.' },
+            { arabic: 'بَيْت', phonetic: 'Bayt', spanish: 'Casa', context: 'Hogar / Vivienda.' },
+            { arabic: 'غُرْفَة', phonetic: 'Ghurfa', spanish: 'Habitación', context: 'Espacio en la casa.' },
+            { arabic: 'مَطْبَخ', phonetic: 'Matbakh', spanish: 'Cocina', context: 'Lugar para cocinar.' },
+            { arabic: 'حَمَّام', phonetic: 'Hammam', spanish: 'Baño', context: 'Lugar de aseo.' },
+            { arabic: 'مَدِينَة', phonetic: 'Madina', spanish: 'Ciudad', context: 'Lugar geográfico.' },
+            { arabic: 'شَارِع', phonetic: 'Shari\'', spanish: 'Calle', context: 'Vía pública.' },
+            { arabic: 'مَدْرَسَة', phonetic: 'Madrasa', spanish: 'Escuela', context: 'Lugar de estudio.' },
+            { arabic: 'جَامِعَة', phonetic: 'Jami\'a', spanish: 'Universidad', context: 'Centro de educación superior.' },
+            { arabic: 'مُسْتَشْفَى', phonetic: 'Mustashfa', spanish: 'Hospital', context: 'Centro médico.' },
+            { arabic: 'مَطْعَم', phonetic: 'Mat\'am', spanish: 'Restaurante', context: 'Lugar para comer.' },
+            { arabic: 'سُوق', phonetic: 'Suq', spanish: 'Mercado', context: 'Lugar de comercio.' },
+            { arabic: 'مَطَار', phonetic: 'Matar', spanish: 'Aeropuerto', context: 'Lugar de transporte aéreo.' },
+            { arabic: 'فُنْدُق', phonetic: 'Funduq', spanish: 'Hotel', context: 'Hospedaje.' },
+            { arabic: 'مَاء', phonetic: 'Ma\'', spanish: 'Agua', context: 'Bebida / Elemento.' },
+            { arabic: 'خُبْز', phonetic: 'Khubz', spanish: 'Pan', context: 'Alimento básico.' },
+            { arabic: 'طَعَام', phonetic: 'Ta\'am', spanish: 'Comida', context: 'Alimento.' },
+            { arabic: 'قَهْوَة', phonetic: 'Qahwa', spanish: 'Café', context: 'Bebida.' },
+            { arabic: 'شَاي', phonetic: 'Shay', spanish: 'Té', context: 'Bebida.' },
+            { arabic: 'فَوَاكِه', phonetic: 'Fawakih', spanish: 'Frutas', context: 'Alimento vegetal.' },
+            { arabic: 'خَضْرَوَات', phonetic: 'Khadrawat', spanish: 'Verduras', context: 'Alimento vegetal.' },
+            { arabic: 'لَحْم', phonetic: 'Lahm', spanish: 'Carne', context: 'Alimento.' },
+            { arabic: 'دَجَاج', phonetic: 'Dajaj', spanish: 'Pollo', context: 'Alimento.' },
+            { arabic: 'سَمَك', phonetic: 'Samak', spanish: 'Pescado', context: 'Alimento.' },
+            { arabic: 'يَوْم', phonetic: 'Yawm', spanish: 'Día', context: 'Tiempo.' },
+            { arabic: 'الْيَوْم', phonetic: 'Al-yawm', spanish: 'Hoy', context: 'Tiempo presente.' },
+            { arabic: 'غَدًا', phonetic: 'Ghadan', spanish: 'Mañana', context: 'Tiempo futuro.' },
+            { arabic: 'أَمْس', phonetic: 'Ams', spanish: 'Ayer', context: 'Tiempo pasado.' },
+            { arabic: 'أُسْبُوع', phonetic: 'Usbu\'', spanish: 'Semana', context: 'Período de 7 días.' },
+            { arabic: 'شَهْر', phonetic: 'Shahr', spanish: 'Mes', context: 'Período de tiempo.' },
+            { arabic: 'سَنَة', phonetic: 'Sana', spanish: 'Año', context: 'Período de 12 meses.' },
+            { arabic: 'وَقْت', phonetic: 'Waqt', spanish: 'Tiempo', context: 'Concepto temporal.' },
+            { arabic: 'سَاعَة', phonetic: 'Sa\'a', spanish: 'Hora / Reloj', context: 'Medida de tiempo o instrumento.' },
+            { arabic: 'كَبِير', phonetic: 'Kabir', spanish: 'Grande', context: 'Adjetivo de tamaño.' },
+            { arabic: 'صَغِير', phonetic: 'Saghir', spanish: 'Pequeño', context: 'Adjetivo de tamaño.' },
+            { arabic: 'جَمِيل', phonetic: 'Jamil', spanish: 'Bonito / Hermoso', context: 'Adjetivo estético.' },
+            { arabic: 'جَدِيد', phonetic: 'Jadid', spanish: 'Nuevo', context: 'Adjetivo de antigüedad.' },
+            { arabic: 'قَدِيم', phonetic: 'Qadim', spanish: 'Viejo', context: 'Adjetivo de antigüedad.' },
+            { arabic: 'قَرِيب', phonetic: 'Qarib', spanish: 'Cerca', context: 'Distancia.' },
+            { arabic: 'بَعِيد', phonetic: 'Ba\'id', spanish: 'Lejos', context: 'Distancia.' },
+            { arabic: 'جَيِّد', phonetic: 'Jayyid', spanish: 'Bueno', context: 'Calidad.' },
+            { arabic: 'سَيِّئ', phonetic: 'Sayyi\'', spanish: 'Malo', context: 'Calidad.' },
+            { arabic: 'سَهْل', phonetic: 'Sahl', spanish: 'Fácil', context: 'Dificultad.' },
+            { arabic: 'صَعْب', phonetic: 'Sa\'b', spanish: 'Difícil', context: 'Dificultad.' },
+            { arabic: 'كِتَاب', phonetic: 'Kitab', spanish: 'Libro', context: 'Objeto de lectura.' },
+            { arabic: 'قَلَم', phonetic: 'Qalam', spanish: 'Bolígrafo / Lápiz', context: 'Útil de escritura.' },
+            { arabic: 'سَيَّارَة', phonetic: 'Sayyara', spanish: 'Coche', context: 'Vehículo.' },
+            { arabic: 'حَافِلَة', phonetic: 'Hafila', spanish: 'Autobús', context: 'Vehículo de transporte.' },
+            { arabic: 'مَال', phonetic: 'Mal', spanish: 'Dinero', context: 'Recurso económico.' },
+            { arabic: 'عَمَل', phonetic: '\'Amal', spanish: 'Trabajo', context: 'Ocupación / Labor.' },
+            { arabic: 'أَكَلَ', phonetic: 'Akala', spanish: 'Comer', context: 'Acción / Verbo.' },
+            { arabic: 'شَرِبَ', phonetic: 'Shariba', spanish: 'Beber', context: 'Acción / Verbo.' },
+            { arabic: 'ذَهَبَ', phonetic: 'Dhahaba', spanish: 'Ir', context: 'Acción / Verbo.' },
+            { arabic: 'جَاءَ', phonetic: 'Ja\'a', spanish: 'Venir', context: 'Acción / Verbo.' },
+            { arabic: 'عَرَفَ', phonetic: '\'Arafa', spanish: 'Saber / Conocer', context: 'Acción / Verbo.' }
         ];
 
         const quizQuestions = [
@@ -492,7 +593,7 @@
             chatBox.innerHTML += `
                 <div id="${loadingId}" class="flex items-start space-x-3">
                     <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\\'>ر</div>';">
+                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
                     </div>
                     <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm flex items-center gap-2 text-slate-500">
                         <i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i>
@@ -505,11 +606,10 @@
             let replyText = "";
 
             try {
-                chatHistory.push({ role: "user", parts: [{ text: userMsg }] });
-                replyText = await fetchBackendResponse(userMsg);
-                chatHistory.push({ role: "model", parts: [{ text: replyText }] });
+                replyText = await fetchGeminiResponse(userMsg);
             } catch (error) {
-                console.error("Error al conectar con la API, usando respuesta de respaldo:", error);
+                console.log("Error al conectar con la API, usando respuesta de respaldo:", error);
+                await new Promise(r => setTimeout(r, 400));
                 replyText = getSmartFallbackResponse(userMsg);
             }
 
@@ -520,7 +620,7 @@
             chatBox.innerHTML += `
                 <div class="flex items-start space-x-3">
                     <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\\'>ر</div>';">
+                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
                     </div>
                     <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
                         <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
@@ -534,20 +634,25 @@
             addXP(1);
         }
 
-        async function fetchBackendResponse(userQuery) {
-            // Detecta si la página se ejecuta en GitHub Pages para redirigir la petición al backend en Vercel
-            let BACKEND_URL = "/api/chat";
-            if (window.location.hostname.includes("github.io")) {
-                BACKEND_URL = "https://proyecto-sage-ten-57.vercel.app/api/chat";
-            }
+        async function fetchGeminiResponse(userQuery) {
+            chatHistory.push({ role: "user", parts: [{ text: userQuery }] });
 
-            const response = await fetch(BACKEND_URL, {
+            const contents = [
+                {
+                    role: "user",
+                    parts: [{ text: SYSTEM_PROMPT }]
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "¡Comprendido! Asumo mi rol como la Profesora Reham. Responderé con claridad, calidez y formato estructurado en árabe, fonética y español." }]
+                },
+                ...chatHistory.slice(-8)
+            ];
+
+            const response = await fetch(PROXY_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    userQuery: userQuery,
-                    history: chatHistory
-                })
+                body: JSON.stringify({ contents: contents })
             });
 
             if (!response.ok) {
@@ -555,7 +660,11 @@
             }
 
             const data = await response.json();
-            return data.reply;
+            const textResult = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo obtener respuesta.";
+
+            chatHistory.push({ role: "model", parts: [{ text: textResult }] });
+
+            return textResult;
         }
 
         function getSmartFallbackResponse(msg) {
@@ -567,7 +676,7 @@
             } else if (lower.includes('restaurante') || lower.includes('comida')) {
                 return `Frases esenciales para un restaurante árabe:\n\n1. **أُاريدُ هَذا مِنْ فَضْلِك** (*Ureedu hadha min fadlik*) — *"Quiero esto, por favor"*.\n2. **القَائِمَة مِنْ فَضْلِك** (*Al-qa'imah min fadlik*) — *"La carta/menú, por favor"*.\n3. **الحِساب مِنْ فَضْلِك** (*Al-hisab min fadlik*) — *"La cuenta, por favor"*.`;
             } else if (lower.includes('marroqui') || lower.includes('darija') || lower.includes('clasico') || lower.includes('dialecto')) {
-                return `El árabe clásico o Árabe Estándar Moderno (**Fusha / الفصحى**) es la lengua oficial utilizada en libros, noticias y educación en todo el mundo árabe.\n\nPor otro lado, el **Darija (الدارجة)** es el dialecto hablado cotidiano en Marruecos, con fuerte influence del amazigh (bereber), francés y español.`;
+                return `El árabe clásico o Árabe Estándar Moderno (**Fusha / الفصحى**) es la lengua oficial utilizada en libros, noticias y educación en todo el mundo árabe.\n\nPor otro lado, el **Darija (الدارجة)** es el dialecto hablado cotidiano en Marruecos, con fuerte influencia del amazigh (bereber), francés y español.`;
             } else {
                 return `¡Excelente pregunta! En árabe clásico (Fusha) es muy importante la pronunciación correcta de los sonidos vocálicos. ¿Quieres practicar algún vocabulario o frase en específico con la Profesora Reham?`;
             }
