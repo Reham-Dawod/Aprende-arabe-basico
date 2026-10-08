@@ -22,15 +22,28 @@
                         emerald: {
                             50: '#ecfdf5',
                             100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
                             500: '#10b981',
                             600: '#059669',
                             700: '#047857',
                             800: '#065f46',
                             900: '#064e3b',
+                            950: '#022c22',
                         },
                         amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
                             400: '#fbbf24',
                             500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03',
                         }
                     },
                     fontFamily: {
@@ -67,12 +80,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="relative w-11 h-11 rounded-full overflow-hidden border-2 border-emerald-500 shadow-md">
-                    <img id="headerAvatar" src="REHAM  ريهام.jfif" alt="Reham - Profesor IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold text-lg\'>ر</div>';">
+                    <img id="headerAvatar" src="REHAM%20%20%D8%B1%D9%8A%D9%87%D8%A7%D9%85.jfif" alt="Reham - Profesor IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold text-lg\'>ر</div>';">
                 </div>
                 <div>
                     <h1 class="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 to-teal-400 bg-clip-text text-transparent flex items-center gap-1.5">
                         <span>REHAM | ريهام</span>
-                        <span class="text-xs font-normal text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded px-1.5 py-0.5">Teacher IA</span>
+                        <span class="text-xs font-normal text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded px-1.5 py-0.5">Asistente de Lecciones</span>
                     </h1>
                     <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Aprende Árabe Básico</p>
                 </div>
@@ -93,7 +106,7 @@
                     <i class="fa-solid fa-book"></i> Diccionario
                 </button>
                 <button onclick="switchTab('ai-tutor')" id="tab-ai-tutor" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <i class="fa-solid fa-wand-magic-sparkles text-emerald-500"></i> IA Tutor
+                    <i class="fa-solid fa-robot text-emerald-500"></i> Asistente IA
                 </button>
             </nav>
 
@@ -124,7 +137,7 @@
                 <div class="relative z-10 max-w-xl">
                     <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Módulo 1: Fundamentos</span>
                     <h2 class="text-2xl font-bold mb-1">¡Aprende Árabe con la Profesora Reham!</h2>
-                    <p class="text-emerald-100 text-sm mb-4">Domina el alfabeto, los números, frases esenciales y cortesía con lecciones interactivas.</p>
+                    <p class="text-emerald-100 text-sm mb-4">Domina el alfabeto completo, los números del 1 al 100, frases esenciales y cortesía.</p>
                     <div class="w-full bg-emerald-900/50 rounded-full h-2.5 overflow-hidden">
                         <div id="progressBar" class="bg-amber-400 h-2.5 rounded-full transition-all duration-300" style="width: 25%"></div>
                     </div>
@@ -138,9 +151,9 @@
                         <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-font"></i></span>
                         <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">10 XP</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">El Alfabeto Árabe</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Conoce las letras principales del alifato y su sonido.</p>
-                    <button onclick="toggleLessonDetail('alphabet-detail')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ver Alfabeto</button>
+                    <h3 class="font-bold text-lg mb-1">El Alfabeto Completo (28 Letras)</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Conoce todas las 28 letras del alifato con su sonido exacto.</p>
+                    <button onclick="toggleLessonDetail('alphabet-detail')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ver Alfabeto Completo</button>
                 </div>
 
                 <!-- Tarjeta Lección Números -->
@@ -149,9 +162,9 @@
                         <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-list-ol"></i></span>
                         <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">10 XP</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">Los Números (1 - 10)</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende a contar del 1 al 10 en árabe estándar.</p>
-                    <button onclick="toggleLessonDetail('numbers-detail')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ver Números</button>
+                    <h3 class="font-bold text-lg mb-1">Los Números (1 - 100)</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende los números del 1 al 100 en árabe estándar.</p>
+                    <button onclick="toggleLessonDetail('numbers-detail')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ver Números 1-100</button>
                 </div>
 
                 <!-- Tarjeta Vocabulario -->
@@ -166,103 +179,25 @@
                 </div>
             </div>
 
-            <!-- DETALLE: Alfabeto -->
+            <!-- DETALLE: Alfabeto Completo (28 Letras) -->
             <div id="alphabet-detail" class="hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 space-y-4">
                 <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-700">
-                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-font mr-2"></i> Alfabeto Árabe (Primeras 10 letras)</h3>
+                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-font mr-2"></i> Alfabeto Árabe Completo (28 Letras)</h3>
                     <button onclick="toggleLessonDetail('alphabet-detail')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">أ</span>
-                        <p class="font-semibold text-sm mt-1">Alif (A)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ب</span>
-                        <p class="font-semibold text-sm mt-1">Bā' (B)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ت</span>
-                        <p class="font-semibold text-sm mt-1">Tā' (T)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ث</span>
-                        <p class="font-semibold text-sm mt-1">Thā' (Th)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ج</span>
-                        <p class="font-semibold text-sm mt-1">Jīm (J)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ح</span>
-                        <p class="font-semibold text-sm mt-1">Ḥā' (H fuerte)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">خ</span>
-                        <p class="font-semibold text-sm mt-1">Khā' (Kh / J)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">د</span>
-                        <p class="font-semibold text-sm mt-1">Dāl (D)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ذ</span>
-                        <p class="font-semibold text-sm mt-1">Dhāl (Dh)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ر</span>
-                        <p class="font-semibold text-sm mt-1">Rā' (R)</p>
-                    </div>
+                <div id="alphabetGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3">
+                    <!-- Dinámico -->
                 </div>
             </div>
 
-            <!-- DETALLE: Números -->
+            <!-- DETALLE: Números del 1 al 100 -->
             <div id="numbers-detail" class="hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 space-y-4">
                 <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-700">
-                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-list-ol mr-2"></i> Números del 1 al 10 en Árabe</h3>
+                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-list-ol mr-2"></i> Números del 1 al 100 en Árabe</h3>
                     <button onclick="toggleLessonDetail('numbers-detail')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">١ - وَاحِد</span>
-                        <p class="font-semibold text-xs mt-1">Wahid (1)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٢ - اِثْنَان</span>
-                        <p class="font-semibold text-xs mt-1">Ithnan (2)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٣ - ثَلَاثَة</span>
-                        <p class="font-semibold text-xs mt-1">Thalatha (3)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٤ - أَرْبَعَة</span>
-                        <p class="font-semibold text-xs mt-1">Arba'a (4)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٥ - خَمْسَة</span>
-                        <p class="font-semibold text-xs mt-1">Khamsa (5)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٦ - سِتَّة</span>
-                        <p class="font-semibold text-xs mt-1">Sitta (6)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٧ - سَبْعَة</span>
-                        <p class="font-semibold text-xs mt-1">Sab'a (7)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٨ - ثَمَانِيَة</span>
-                        <p class="font-semibold text-xs mt-1">Thamaniya (8)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٩ - تِسْعَة</span>
-                        <p class="font-semibold text-xs mt-1">Tis'a (9)</p>
-                    </div>
-                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
-                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">١٠ - عَشَرَة</span>
-                        <p class="font-semibold text-xs mt-1">'Ashara (10)</p>
-                    </div>
+                <div id="numbersGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-h-[500px] overflow-y-auto pr-2">
+                    <!-- Dinámico -->
                 </div>
             </div>
         </section>
@@ -295,7 +230,7 @@
             </div>
         </section>
 
-        <!-- 3. QUIZ SECTION (100 PREGUNTAS CON PANTALLA DE RESULTADOS) -->
+        <!-- 3. QUIZ SECTION -->
         <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
             <div id="quizCard" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
                 <div class="flex justify-between items-center mb-4">
@@ -316,7 +251,7 @@
                     <i class="fa-solid fa-trophy"></i>
                 </div>
                 <h3 class="text-2xl font-bold">¡Quiz Completado!</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Has respondido las 100 preguntas del módulo.</p>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Has respondido las 100 preguntas del cuestionario.</p>
                 <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl max-w-xs mx-auto space-y-1">
                     <p class="text-xs text-slate-400 font-semibold uppercase">Puntuación Final</p>
                     <p id="finalScore" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">0 / 1000</p>
@@ -362,19 +297,19 @@
                 <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700">
                     <div class="flex items-center space-x-3">
                         <div class="relative w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-500">
-                            <img src="REHAM  ريهام.jfif" alt="Profesor IA Reham" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold\'>ر</div>';">
+                            <img src="REHAM%20%20%D8%B1%D9%8A%D9%87%D8%A7%D9%85.jfif" alt="Profesor IA Reham" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold\'>ر</div>';">
                         </div>
                         <div>
-                            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100">REHAM | ريهام Teacher IA</h3>
+                            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100">REHAM | ريهام Asistente Lecciones</h3>
                             <p class="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> IA Activa y Lista
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Respuestas en tiempo real
                             </p>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-2">
                         <span class="text-xs bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-semibold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
-                            <i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Gemini 2.5 Flash
+                            <i class="fa-solid fa-book-bookmark text-emerald-500 mr-1"></i> Asistente de Lecciones
                         </span>
                     </div>
                 </div>
@@ -383,25 +318,25 @@
                 <div id="chatMessages" class="flex-1 overflow-y-auto py-4 space-y-4 pr-2">
                     <div class="flex items-start space-x-3">
                         <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                            <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
+                            <img src="REHAM%20%20%D8%B1%D9%8A%D9%87%D8%A7%D9%85.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
                         </div>
                         <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
-                            <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
-                            <p class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu profesora personal de árabe. Puedes preguntarme cualquier duda sobre traducción, gramática o dialectos.</p>
+                            <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Asistente Lecciones</p>
+                            <div class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu asistente de lecciones. Puedo ayudarte a buscar significados del vocabulario, consultar números o repasar las letras del alfabeto de tus lecciones.</div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Quick Prompts -->
                 <div class="flex gap-2 overflow-x-auto py-2">
-                    <button onclick="sendQuickPrompt('¿Cómo se dice mi amor en árabe y cuál es la pronunciación correcta?')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">¿Cómo se dice "mi amor"?</button>
-                    <button onclick="sendQuickPrompt('Explícame la diferencia entre el árabe clásico y el dialecto marroquí (Darija).')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">Clásico vs Dialecto Marroquí</button>
-                    <button onclick="sendQuickPrompt('Dame 3 frases útiles para pedir comida en un restaurante árabe.')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">Frases para restaurante</button>
+                    <button onclick="sendQuickPrompt('¿Cómo se dice agua en árabe?')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">¿Cómo se dice "agua"?</button>
+                    <button onclick="sendQuickPrompt('¿Cuál es el número 50 en árabe?')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">¿Cuál es el número 50?</button>
+                    <button onclick="sendQuickPrompt('¿Cuáles son las primeras letras del alfabeto?')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">Primeras letras del alfabeto</button>
                 </div>
 
                 <!-- Chat Input Area -->
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-                    <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendMessage()" placeholder="Hazle una pregunta sobre árabe a la profesora Reham..." class="flex-1 bg-slate-100 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendMessage()" placeholder="Consulta una palabra, número o letra de las lecciones..." class="flex-1 bg-slate-100 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     <button onclick="sendMessage()" id="btnSend" class="p-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition flex items-center justify-center min-w-[42px]">
                         <i class="fa-solid fa-paper-plane" id="sendIcon"></i>
                     </button>
@@ -413,22 +348,147 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        const PROXY_URL = "/api/chat";
-
-        const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
-Reglas de respuesta:
-1. Responde siempre en español fluido.
-2. Cada vez que incluyas una palabra o frase en árabe, pon la escritura en alfabeto árabe (con vocalización diacrítica/harakat cuando sea útil), seguida inmediatamente de su transliteración/pronunciación en fonética latina entre paréntesis o cursiva, y su traducción al español.
-3. Si el usuario pregunta por dialectos (marroquí, egipcio, levantino), explica amablemente la diferencia con el Árabe Estándar Moderno (Fusha).
-4. Mantén un tono cálido, alentador y profesional.
-5. Utiliza formato Markdown con negritas y viñetas para que la explicación sea fácil de leer.`;
-
-        let chatHistory = [];
         let currentTab = 'lessons';
         let xp = parseInt(localStorage.getItem('reham_xp') || '0');
         let streak = parseInt(localStorage.getItem('reham_streak') || '1');
         let cardIndex = 0;
         let isFlipped = false;
+
+        // ALFABETO ÁRABE COMPLETO (28 LETRAS)
+        const fullAlphabet = [
+            { letter: 'أ', name: 'Alif', sound: 'A' },
+            { letter: 'ب', name: 'Bā\'', sound: 'B' },
+            { letter: 'ت', name: 'Tā\'', sound: 'T' },
+            { letter: 'ث', name: 'Thā\'', sound: 'Th (como en Z)' },
+            { letter: 'ج', name: 'Jīm', sound: 'J / G suave' },
+            { letter: 'ح', name: 'Ḥā\'', sound: 'H aspirada fuerte' },
+            { letter: 'خ', name: 'Khā\'', sound: 'Kh (J fuerte española)' },
+            { letter: 'د', name: 'Dāl', sound: 'D' },
+            { letter: 'ذ', name: 'Dhāl', sound: 'Dh (como D suave)' },
+            { letter: 'ر', name: 'Rā\'', sound: 'R' },
+            { letter: 'ز', name: 'Zāy', sound: 'Z (zumbada)' },
+            { letter: 'س', name: 'Sīn', sound: 'S' },
+            { letter: 'ش', name: 'Shīn', sound: 'Sh (como inglés sh)' },
+            { letter: 'ص', name: 'Ṣād', sound: 'S enfática' },
+            { letter: 'ض', name: 'Ḍād', sound: 'D enfática' },
+            { letter: 'ط', name: 'Ṭā\'', sound: 'T enfática' },
+            { letter: 'ظ', name: 'Ẓā\'', sound: 'Z/Dh enfática' },
+            { letter: 'ع', name: '\'Ayn', sound: 'Sonido gutural' },
+            { letter: 'غ', name: 'Ghayn', sound: 'Gh (R francesa)' },
+            { letter: 'ف', name: 'Fā\'', sound: 'F' },
+            { letter: 'ق', name: 'Qāf', sound: 'Q gutural profunda' },
+            { letter: 'ك', name: 'Kāf', sound: 'K' },
+            { letter: 'ل', name: 'Lām', sound: 'L' },
+            { letter: 'م', name: 'Mīm', sound: 'M' },
+            { letter: 'ن', name: 'Nūn', sound: 'N' },
+            { letter: 'هـ', name: 'Hā\'', sound: 'H suave inglesa' },
+            { letter: 'و', name: 'Wāw', sound: 'W / U larga' },
+            { letter: 'ي', name: 'Yā\'', sound: 'Y / I larga' }
+        ];
+
+        // NÚMEROS DEL 1 AL 100 EN ÁRABE
+        const fullNumbers = [
+            { num: 1, ar: '١ - وَاحِد', phonetic: 'Wahid' },
+            { num: 2, ar: '٢ - اِثْنَان', phonetic: 'Ithnan' },
+            { num: 3, ar: '٣ - ثَلَاثَة', phonetic: 'Thalatha' },
+            { num: 4, ar: '٤ - أَرْبَعَة', phonetic: 'Arba\'a' },
+            { num: 5, ar: '٥ - خَمْسَة', phonetic: 'Khamsa' },
+            { num: 6, ar: '٦ - سِتَّة', phonetic: 'Sitta' },
+            { num: 7, ar: '٧ - سَبْعَة', phonetic: 'Sab\'a' },
+            { num: 8, ar: '٨ - ثَمَانِيَة', phonetic: 'Thamaniya' },
+            { num: 9, ar: '٩ - تِسْعَة', phonetic: 'Tis\'a' },
+            { num: 10, ar: '١٠ - عَشَرَة', phonetic: '\'Ashara' },
+            { num: 11, ar: '١١ - أَحَدَ عَشَر', phonetic: 'Ahada \'ashar' },
+            { num: 12, ar: '١٢ - اِثْنَا عَشَر', phonetic: 'Ithna \'ashar' },
+            { num: 13, ar: '١٣ - ثَلَاثَةَ عَشَر', phonetic: 'Thalathata \'ashar' },
+            { num: 14, ar: '١٤ - أَرْبَعَةَ عَشَر', phonetic: 'Arba\'ata \'ashar' },
+            { num: 15, ar: '١٥ - خَمْسَةَ عَشَر', phonetic: 'Khamsata \'ashar' },
+            { num: 16, ar: '١٦ - سِتَّةَ عَشَر', phonetic: 'Sittata \'ashar' },
+            { num: 17, ar: '١٧ - سَبْعَةَ عَشَر', phonetic: 'Sab\'ata \'ashar' },
+            { num: 18, ar: '١٨ - ثَمَانِيَةَ عَشَر', phonetic: 'Thamaniyata \'ashar' },
+            { num: 19, ar: '١٩ - تِسْعَةَ عَشَر', phonetic: 'Tis\'ata \'ashar' },
+            { num: 20, ar: '٢٠ - عِشْرُون', phonetic: '\'Ishrun' },
+            { num: 21, ar: '٢١ - وَاحِد وَعِشْرُون', phonetic: 'Wahid wa-\'ishrun' },
+            { num: 22, ar: '٢٢ - اِثْنَان وَعِشْرُون', phonetic: 'Ithnan wa-\'ishrun' },
+            { num: 23, ar: '٢٣ - ثَلَاثَة وَعِشْرُون', phonetic: 'Thalatha wa-\'ishrun' },
+            { num: 24, ar: '٢٤ - أَرْبَعَة وَعِشْرُون', phonetic: 'Arba\'a wa-\'ishrun' },
+            { num: 25, ar: '٢٥ - خَمْسَة وَعِشْرُون', phonetic: 'Khamsa wa-\'ishrun' },
+            { num: 26, ar: '٢٦ - سِتَّة وَعِشْرُون', phonetic: 'Sitta wa-\'ishrun' },
+            { num: 27, ar: '٢٧ - سَبْعَة وَعِشْرُون', phonetic: 'Sab\'a wa-\'ishrun' },
+            { num: 28, ar: '٢٨ - ثَمَانِيَة وَعِشْرُون', phonetic: 'Thamaniya wa-\'ishrun' },
+            { num: 29, ar: '٢٩ - تِسْعَة وَعِشْرُون', phonetic: 'Tis\'a wa-\'ishrun' },
+            { num: 30, ar: '٣٠ - ثَلَاثُون', phonetic: 'Thalathun' },
+            { num: 31, ar: '٣١ - وَاحِد وَثَلَاثُون', phonetic: 'Wahid wa-thalathun' },
+            { num: 32, ar: '٣٢ - اِثْنَان وَثَلَاثُون', phonetic: 'Ithnan wa-thalathun' },
+            { num: 33, ar: '٣٣ - ثَلَاثَة وَثَلَاثُون', phonetic: 'Thalatha wa-thalathun' },
+            { num: 34, ar: '٣٤ - أَرْبَعَة وَثَلَاثُون', phonetic: 'Arba\'a wa-thalathun' },
+            { num: 35, ar: '٣٥ - خَمْسَة وَثَلَاثُون', phonetic: 'Khamsa wa-thalathun' },
+            { num: 36, ar: '٣٦ - سِتَّة وَثَلَاثُون', phonetic: 'Sitta wa-thalathun' },
+            { num: 37, ar: '٣٧ - سَبْعَة وَثَلَاثُون', phonetic: 'Sab\'a wa-thalathun' },
+            { num: 38, ar: '٣٨ - ثَمَانِيَة وَثَلَاثُون', phonetic: 'Thamaniya wa-thalathun' },
+            { num: 39, ar: '٣٩ - تِسْعَة وَثَلَاثُون', phonetic: 'Tis\'a wa-thalathun' },
+            { num: 40, ar: '٤٠ - أَرْبَعُون', phonetic: 'Arba\'un' },
+            { num: 41, ar: '٤١ - وَاحِد وَأَرْبَعُون', phonetic: 'Wahid wa-arba\'un' },
+            { num: 42, ar: '٤٢ - اِثْنَان وَأَرْبَعُون', phonetic: 'Ithnan wa-arba\'un' },
+            { num: 43, ar: '٤٣ - ثَلَاثَة وَأَرْبَعُون', phonetic: 'Thalatha wa-arba\'un' },
+            { num: 44, ar: '٤٤ - أَرْبَعَة وَأَرْبَعُون', phonetic: 'Arba\'a wa-arba\'un' },
+            { num: 45, ar: '٤٥ - خَمْسَة وَأَرْبَعُون', phonetic: 'Khamsa wa-arba\'un' },
+            { num: 46, ar: '٤٦ - سِتَّة وَأَرْبَعُون', phonetic: 'Sitta wa-arba\'un' },
+            { num: 47, ar: '٤٧ - سَبْعَة وَأَرْبَعُون', phonetic: 'Sab\'a wa-arba\'un' },
+            { num: 48, ar: '٤٨ - ثَمَانِيَة وَأَرْبَعُون', phonetic: 'Thamaniya wa-arba\'un' },
+            { num: 49, ar: '٤٩ - تِسْعَة وَأَرْبَعُون', phonetic: 'Tis\'a wa-arba\'un' },
+            { num: 50, ar: '٥٠ - خَمْسُون', phonetic: 'Khamsun' },
+            { num: 51, ar: '٥١ - وَاحِد وَخَمْسُون', phonetic: 'Wahid wa-khamsun' },
+            { num: 52, ar: '٥٢ - اِثْنَان وَخَمْسُون', phonetic: 'Ithnan wa-khamsun' },
+            { num: 53, ar: '٥٣ - ثَلَاثَة وَخَمْسُون', phonetic: 'Thalatha wa-khamsun' },
+            { num: 54, ar: '٥٤ - أَرْبَعَة وَخَمْسُون', phonetic: 'Arba\'a wa-khamsun' },
+            { num: 55, ar: '٥٥ - خَمْسَة وَخَمْسُون', phonetic: 'Khamsa wa-khamsun' },
+            { num: 56, ar: '٥٦ - سِتَّة وَخَمْسُون', phonetic: 'Sitta wa-khamsun' },
+            { num: 57, ar: '٥٧ - سَبْعَة وَخَمْسُون', phonetic: 'Sab\'a wa-khamsun' },
+            { num: 58, ar: '٥٨ - ثَمَانِيَة وَخَمْسُون', phonetic: 'Thamaniya wa-khamsun' },
+            { num: 59, ar: '٥٩ - تِسْعَة وَخَمْسُون', phonetic: 'Tis\'a wa-khamsun' },
+            { num: 60, ar: '٦٠ - سِتُّون', phonetic: 'Sittun' },
+            { num: 61, ar: '٦١ - وَاحِد وَسِتُّون', phonetic: 'Wahid wa-sittun' },
+            { num: 62, ar: '٦٢ - اِثْنَان وَسِتُّون', phonetic: 'Ithnan wa-sittun' },
+            { num: 63, ar: '٦٣ - ثَلَاثَة وَسِتُّون', phonetic: 'Thalatha wa-sittun' },
+            { num: 64, ar: '٦٤ - أَرْبَعَة وَسِتُّون', phonetic: 'Arba\'a wa-sittun' },
+            { num: 65, ar: '٦٥ - خَمْسَة وَسِتُّون', phonetic: 'Khamsa wa-sittun' },
+            { num: 66, ar: '٦٦ - سِتَّة وَسِتُّون', phonetic: 'Sitta wa-sittun' },
+            { num: 67, ar: '٦٧ - سَبْعَة وَسِتُّون', phonetic: 'Sab\'a wa-sittun' },
+            { num: 68, ar: '٦٨ - ثَمَانِيَة وَسِتُّون', phonetic: 'Thamaniya wa-sittun' },
+            { num: 69, ar: '٦٩ - تِسْعَة وَسِتُّون', phonetic: 'Tis\'a wa-sittun' },
+            { num: 70, ar: '٧٠ - سَبْعُون', phonetic: 'Sab\'un' },
+            { num: 71, ar: '٧١ - وَاحِد وَسَبْعُون', phonetic: 'Wahid wa-sab\'un' },
+            { num: 72, ar: '٧٢ - اِثْنَان وَسَبْعُون', phonetic: 'Ithnan wa-sab\'un' },
+            { num: 73, ar: '٧٣ - ثَلَاثَة وَسَبْعُون', phonetic: 'Thalatha wa-sab\'un' },
+            { num: 74, ar: '٧٤ - أَرْبَعَة وَسَبْعُون', phonetic: 'Arba\'a wa-sab\'un' },
+            { num: 75, ar: '٧٥ - خَمْسَة وَسَبْعُون', phonetic: 'Khamsa wa-sab\'un' },
+            { num: 76, ar: '٧٦ - سِتَّة وَسَبْعُون', phonetic: 'Sitta wa-sab\'un' },
+            { num: 77, ar: '٧٧ - سَبْعَة وَسَبْعُون', phonetic: 'Sab\'a wa-sab\'un' },
+            { num: 78, ar: '٧٨ - ثَمَانِيَة وَسَبْعُون', phonetic: 'Thamaniya wa-sab\'un' },
+            { num: 79, ar: '٧٩ - تِسْعَة وَسَبْعُون', phonetic: 'Tis\'a wa-sab\'un' },
+            { num: 80, ar: '٨٠ - ثَمَانُون', phonetic: 'Thamanun' },
+            { num: 81, ar: '٨١ - وَاحِد وَثَمَانُون', phonetic: 'Wahid wa-thamanun' },
+            { num: 82, ar: '٨٢ - اِثْنَان وَثَمَانُون', phonetic: 'Ithnan wa-thamanun' },
+            { num: 83, ar: '٨٣ - ثَلَاثَة وَثَمَانُون', phonetic: 'Thalatha wa-thamanun' },
+            { num: 84, ar: '٨٤ - أَرْبَعَة وَثَمَانُون', phonetic: 'Arba\'a wa-thamanun' },
+            { num: 85, ar: '٨٥ - خَمْسَة وَثَمَانُون', phonetic: 'Khamsa wa-thamanun' },
+            { num: 86, ar: '٨٦ - سِتَّة وَثَمَانُون', phonetic: 'Sitta wa-thamanun' },
+            { num: 87, ar: '٨٧ - سَبْعَة وَثَمَانُون', phonetic: 'Sab\'a wa-thamanun' },
+            { num: 88, ar: '٨٨ - ثَمَانِيَة وَثَمَانُون', phonetic: 'Thamaniya wa-thamanun' },
+            { num: 89, ar: '٨٩ - تِسْعَة وَثَمَانُون', phonetic: 'Tis\'a wa-thamanun' },
+            { num: 90, ar: '٩٠ - تِسْعُون', phonetic: 'Tis\'un' },
+            { num: 91, ar: '٩١ - وَاحِد وَتِسْعُون', phonetic: 'Wahid wa-tis\'un' },
+            { num: 92, ar: '٩٢ - اِثْنَان وَتِسْعُون', phonetic: 'Ithnan wa-tis\'un' },
+            { num: 93, ar: '٩٣ - ثَلَاثَة وَتِسْعُون', phonetic: 'Thalatha wa-tis\'un' },
+            { num: 94, ar: '٩٤ - أَرْبَعَة وَتِسْعُون', phonetic: 'Arba\'a wa-tis\'un' },
+            { num: 95, ar: '٩٥ - خَمْسَة وَتِسْعُون', phonetic: 'Khamsa wa-tis\'un' },
+            { num: 96, ar: '٩٦ - سِتَّة وَتِسْعُون', phonetic: 'Sitta wa-tis\'un' },
+            { num: 97, ar: '٩٧ - سَبْعَة وَتِسْعُون', phonetic: 'Sab\'a wa-tis\'un' },
+            { num: 98, ar: '٩٨ - ثَمَانِيَة وَتِسْعُون', phonetic: 'Thamaniya wa-tis\'un' },
+            { num: 99, ar: '٩٩ - تِسْعَة وَتِسْعُون', phonetic: 'Tis\'a wa-tis\'un' },
+            { num: 100, ar: '١٠٠ - مِئَة', phonetic: 'Mi\'a' }
+        ];
 
         const vocabulary = [
             { arabic: 'مَرْحَبًا', phonetic: 'Marhaban', spanish: 'Hola', context: 'Saludo formal y amigable común en todo el mundo árabe.' },
@@ -533,7 +593,6 @@ Reglas de respuesta:
             { arabic: 'عَرَفَ', phonetic: '\'Arafa', spanish: 'Saber / Conocer', context: 'Acción / Verbo.' }
         ];
 
-        // QUIZ DE 100 PREGUNTAS CON OPCIONES DINÁMICAS Y VARIADAS
         const quizQuestions = [
             { q: "¿Qué significa la expresión 'شُكْرًا' (Shukran)?", options: ["1. Por favor", "2. Gracias", "3. Hola"], answer: 1 },
             { q: "¿Cuál es la respuesta adecuada a 'Shukran'?", options: ["1. 'Afwan (عَفْوًا)", "2. Marhaban (مَرْحَبًا)", "3. Ahlan (أَهْلًا)"], answer: 0 },
@@ -565,76 +624,75 @@ Reglas de respuesta:
             { q: "¿Cómo se dice '¿Por qué...?' en árabe?", options: ["1. Limadha...? (لِمَاذَا...؟)", "2. Kam...?", "3. Mata...?"], answer: 0 },
             { q: "¿Qué significa 'كَمْ...؟' (Kam...?)", options: ["1. ¿Cuándo...?", "2. ¿Cuánto / Cuántos...?", "3. ¿Qué...?"], answer: 1 },
             { q: "¿Qué significa 'مَتَى...؟' (Mata...?)", options: ["1. ¿Cuándo...?", "2. ¿Dónde...?", "3. ¿Quién...?"], answer: 0 },
-            { q: "¿Cómo se dice 'Yo' en árabe?", options: ["1. Ana (أَنَا)", "2. Anta", "3. Huwa"], answer: 0 },
-            { q: "¿Qué pronombre es 'Tú' (masculino)?", options: ["1. Anta (أَنْتَ)", "2. Anti", "3. Hiya"], answer: 0 },
-            { q: "¿Qué pronombre es 'Tú' (femenino)?", options: ["1. Anti (أَنْتِ)", "2. Anta", "3. Antum"], answer: 0 },
-            { q: "¿Cómo se dice 'Él' en árabe?", options: ["1. Huwa (هُوَ)", "2. Hiya", "3. Hum"], answer: 0 },
-            { q: "¿Cómo se dice 'Ella' en árabe?", options: ["1. Hiya (هِيَ)", "2. Huwa", "3. Nahnu"], answer: 0 },
+            { q: "¿Cómo se dice 'Yo' en árabe?", options: ["1. Anta", "2. Ana (أَنَا)", "3. Huwa"], answer: 1 },
+            { q: "¿Qué pronombre es 'Tú' (masculino)?", options: ["1. Anti", "2. Anta (أَنْتَ)", "3. Hiya"], answer: 1 },
+            { q: "¿Qué pronombre es 'Tú' (femenino)?", options: ["1. Anta", "2. Anti (أَنْتِ)", "3. Antum"], answer: 1 },
+            { q: "¿Cómo se dice 'Él' en árabe?", options: ["1. Hiya", "2. Huwa (هُوَ)", "3. Hum"], answer: 1 },
+            { q: "¿Cómo se dice 'Ella' en árabe?", options: ["1. Huwa", "2. Hiya (هِيَ)", "3. Nahnu"], answer: 1 },
             { q: "¿Qué significa 'أَنْتُمْ' (Antum)?", options: ["1. Vosotros / Ustedes", "2. Ellos", "3. Nosotros"], answer: 0 },
-            { q: "¿Qué significa 'هُمْ' (Hum)?", options: ["1. Ellos / Ellas", "2. Nosotros", "3. Tú"], answer: 0 },
-            { q: "¿Cómo se dice 'Este / Esto' (masculino)?", options: ["1. Hadha (هَذَا)", "2. Hadhihi", "3. Ana"], answer: 0 },
-            { q: "¿Cómo se dice 'Esta' (femenino)?", options: ["1. Hadhihi (هَذِهِ)", "2. Hadha", "3. Huwa"], answer: 0 },
+            { q: "¿Qué significa 'هُمْ' (Hum)?", options: ["1. Nosotros", "2. Ellos / Ellas", "3. Tú"], answer: 1 },
+            { q: "¿Cómo se dice 'Este / Esto' (masculino)?", options: ["1. Hadhihi", "2. Hadha (هَذَا)", "3. Ana"], answer: 1 },
+            { q: "¿Cómo se dice 'Esta' (femenino)?", options: ["1. Hadha", "2. Hadhihi (هَذِهِ)", "3. Huwa"], answer: 1 },
             { q: "¿Cómo se dice 'Hermano' en árabe?", options: ["1. Akh (أَخ)", "2. Ukht", "3. Ab"], answer: 0 },
             { q: "¿Cómo se dice 'Hermana' en árabe?", options: ["1. Ukht (أُخْت)", "2. Akh", "3. Umm"], answer: 0 },
-            { q: "¿Qué significa 'ابْن' (Ibn)?", options: ["1. Hijo", "2. Hija", "3. Padre"], answer: 0 },
+            { q: "¿Qué significa 'ابْن' (Ibn)?", options: ["1. Hija", "2. Hijo", "3. Padre"], answer: 1 },
             { q: "¿Qué significa 'ابْنَة' (Ibna)?", options: ["1. Hija", "2. Hijo", "3. Madre"], answer: 0 },
-            { q: "¿Cómo se dice 'Familia' en árabe?", options: ["1. 'A'ila (عَائِلَة)", "2. Sadiq", "3. Bayt"], answer: 0 },
+            { q: "¿Cómo se dice 'Familia' en árabe?", options: ["1. Sadiq", "2. 'A'ila (عَائِلَة)", "3. Bayt"], answer: 1 },
             { q: "¿Qué significa 'صَدِيق' (Sadiq)?", options: ["1. Amigo", "2. Trabajo", "3. Ciudad"], answer: 0 },
-            { q: "¿Cómo se dice 'Hombre' en árabe?", options: ["1. Rajul (رَجُل)", "2. Imra'a", "3. Walad"], answer: 0 },
+            { q: "¿Cómo se dice 'Hombre' en árabe?", options: ["1. Imra'a", "2. Rajul (رَجُل)", "3. Walad"], answer: 1 },
             { q: "¿Cómo se dice 'Mujer' en árabe?", options: ["1. Imra'a (امْرَأَة)", "2. Rajul", "3. Bint"], answer: 0 },
-            { q: "¿Qué significa 'وَلَد' (Walad)?", options: ["1. Niño", "2. Niña", "3. Amigo"], answer: 0 },
+            { q: "¿Qué significa 'وَلَد' (Walad)?", options: ["1. Niña", "2. Niño", "3. Amigo"], answer: 1 },
             { q: "¿Qué significa 'بِنْت' (Bint)?", options: ["1. Niña / Hija", "2. Niño", "3. Madre"], answer: 0 },
             { q: "¿Cómo se dice 'Habitación' en árabe?", options: ["1. Ghurfa (غُرْفَة)", "2. Matbakh", "3. Hammam"], answer: 0 },
-            { q: "¿Qué lugar de la casa es 'مَطْبَخ' (Matbakh)?", options: ["1. Cocina", "2. Baño", "3. Habitación"], answer: 0 },
+            { q: "¿Qué lugar de la casa es 'مَطْبَخ' (Matbakh)?", options: ["1. Baño", "2. Cocina", "3. Habitación"], answer: 1 },
             { q: "¿Qué lugar de la casa es 'حَمَّام' (Hammam)?", options: ["1. Baño", "2. Cocina", "3. Casa"], answer: 0 },
-            { q: "¿Cómo se dice 'Ciudad' en árabe?", options: ["1. Madina (مَدِينَة)", "2. Shari'", "3. Suq"], answer: 0 },
+            { q: "¿Cómo se dice 'Ciudad' en árabe?", options: ["1. Shari'", "2. Madina (مَدِينَة)", "3. Suq"], answer: 1 },
             { q: "¿Qué significa 'شَارِع' (Shari')?", options: ["1. Calle", "2. Mercado", "3. Hotel"], answer: 0 },
-            { q: "¿Cómo se dice 'Escuela' en árabe?", options: ["1. Madrasa (مَدْرَسَة)", "2. Jami'a", "3. Mustashfa"], answer: 0 },
+            { q: "¿Cómo se dice 'Escuela' en árabe?", options: ["1. Jami'a", "2. Madrasa (مَدْرَسَة)", "3. Mustashfa"], answer: 1 },
             { q: "¿Qué significa 'جَامِعَة' (Jami'a)?", options: ["1. Universidad", "2. Escuela", "3. Hospital"], answer: 0 },
-            { q: "¿Cómo se dice 'Hospital' en árabe?", options: ["1. Mustashfa (مُسْتَشْفَى)", "2. Funduq", "3. Matar"], answer: 0 },
+            { q: "¿Cómo se dice 'Hospital' en árabe?", options: ["1. Funduq", "2. Mustashfa (مُسْتَشْفَى)", "3. Matar"], answer: 1 },
             { q: "¿Qué es un 'مَطْعَم' (Mat'am)?", options: ["1. Restaurante", "2. Mercado", "3. Aeropuerto"], answer: 0 },
-            { q: "¿Qué es un 'سُوق' (Suq)?", options: ["1. Mercado", "2. Hotel", "3. Calle"], answer: 0 },
+            { q: "¿Qué es un 'سُوق' (Suq)?", options: ["1. Hotel", "2. Mercado", "3. Calle"], answer: 1 },
             { q: "¿Cómo se dice 'Aeropuerto' en árabe?", options: ["1. Matar (مَطَار)", "2. Funduq", "3. Sayyara"], answer: 0 },
-            { q: "¿Qué significa 'فُنْدُق' (Funduq)?", options: ["1. Hotel", "2. Hospital", "3. Casa"], answer: 0 },
+            { q: "¿Qué significa 'فُنْدُق' (Funduq)?", options: ["1. Hospital", "2. Hotel", "3. Casa"], answer: 1 },
             { q: "¿Cómo se dice 'Pan' en árabe?", options: ["1. Khubz (خُبْز)", "2. Ma'", "3. Ta'am"], answer: 0 },
-            { q: "¿Qué significa 'طَعَام' (Ta'am)?", options: ["1. Comida", "2. Agua", "3. Dinero"], answer: 0 },
-            { q: "¿Cómo se dice 'Café' en árabe?", options: ["1. Qahwa (قَهْوَة)", "2. Shay", "3. Ma'"], answer: 0 },
+            { q: "¿Qué significa 'طَعَام' (Ta'am)?", options: ["1. Agua", "2. Comida", "3. Dinero"], answer: 1 },
+            { q: "¿Cómo se dice 'Café' en árabe?", options: ["1. Shay", "2. Qahwa (قَهْوَة)", "3. Ma'"], answer: 1 },
             { q: "¿Cómo se dice 'Té' en árabe?", options: ["1. Shay (شَاي)", "2. Qahwa", "3. Khubz"], answer: 0 },
             { q: "¿Qué significa 'فَوَاكِه' (Fawakih)?", options: ["1. Frutas", "2. Verduras", "3. Carne"], answer: 0 },
-            { q: "¿Qué significa 'خَضْرَوَات' (Khadrawat)?", options: ["1. Verduras", "2. Frutas", "3. Pescado"], answer: 0 },
-            { q: "¿Cómo se dice 'Carne' en árabe?", options: ["1. Lahm (لَحْم)", "2. Dajaj", "3. Samak"], answer: 0 },
+            { q: "¿Qué significa 'خَضْرَوَات' (Khadrawat)?", options: ["1. Frutas", "2. Verduras", "3. Pescado"], answer: 1 },
+            { q: "¿Cómo se dice 'Carne' en árabe?", options: ["1. Dajaj", "2. Lahm (لَحْم)", "3. Samak"], answer: 1 },
             { q: "¿Cómo se dice 'Pollo' en árabe?", options: ["1. Dajaj (دَجَاج)", "2. Lahm", "3. Samak"], answer: 0 },
-            { q: "¿Cómo se dice 'Pescado' en árabe?", options: ["1. Samak (سَمَك)", "2. Dajaj", "3. Lahm"], answer: 0 },
+            { q: "¿Cómo se dice 'Pescado' en árabe?", options: ["1. Dajaj", "2. Samak (سَمَك)", "3. Lahm"], answer: 1 },
             { q: "¿Qué significa 'يَوْم' (Yawm)?", options: ["1. Día", "2. Semana", "3. Año"], answer: 0 },
-            { q: "¿Cómo se dice 'Hoy' en árabe?", options: ["1. Al-yawm (الْيَوْم)", "2. Ghadan", "3. Ams"], answer: 0 },
+            { q: "¿Cómo se dice 'Hoy' en árabe?", options: ["1. Ghadan", "2. Al-yawm (الْيَوْم)", "3. Ams"], answer: 1 },
             { q: "¿Cómo se dice 'Ayer' en árabe?", options: ["1. Ams (أَمْس)", "2. Ghadan", "3. Al-yawm"], answer: 0 },
-            { q: "¿Qué significa 'أُسْبُوع' (Usbu')?", options: ["1. Semana", "2. Mes", "3. Año"], answer: 0 },
+            { q: "¿Qué significa 'أُسْبُوع' (Usbu')?", options: ["1. Mes", "2. Semana", "3. Año"], answer: 1 },
             { q: "¿Qué significa 'شَهْر' (Shahr)?", options: ["1. Mes", "2. Semana", "3. Hora"], answer: 0 },
-            { q: "¿Cómo se dice 'Año' en árabe?", options: ["1. Sana (سَنَة)", "2. Shahr", "3. Yawm"], answer: 0 },
+            { q: "¿Cómo se dice 'Año' en árabe?", options: ["1. Shahr", "2. Sana (سَنَة)", "3. Yawm"], answer: 1 },
             { q: "¿Qué significa 'وَقْت' (Waqt)?", options: ["1. Tiempo", "2. Hora", "3. Dinero"], answer: 0 },
-            { q: "¿Qué significa 'سَاعَة' (Sa'a)?", options: ["1. Hora / Reloj", "2. Tiempo", "3. Día"], answer: 0 },
+            { q: "¿Qué significa 'سَاعَة' (Sa'a)?", options: ["1. Tiempo", "2. Hora / Reloj", "3. Día"], answer: 1 },
             { q: "¿Cómo se dice 'Grande' en árabe?", options: ["1. Kabir (كَبِير)", "2. Saghir", "3. Jamil"], answer: 0 },
-            { q: "¿Cómo se dice 'Pequeño' en árabe?", options: ["1. Saghir (صَغِير)", "2. Kabir", "3. Jadid"], answer: 0 },
+            { q: "¿Cómo se dice 'Pequeño' en árabe?", options: ["1. Kabir", "2. Saghir (صَغِير)", "3. Jadid"], answer: 1 },
             { q: "¿Qué significa 'جَمِيل' (Jamil)?", options: ["1. Bonito / Hermoso", "2. Nuevo", "3. Viejo"], answer: 0 },
-            { q: "¿Cómo se dice 'Nuevo' en árabe?", options: ["1. Jadid (جَدِيد)", "2. Qadim", "3. Kabir"], answer: 0 },
+            { q: "¿Cómo se dice 'Nuevo' en árabe?", options: ["1. Qadim", "2. Jadid (جَدِيد)", "3. Kabir"], answer: 1 },
             { q: "¿Cómo se dice 'Viejo' en árabe?", options: ["1. Qadim (قَدِيم)", "2. Jadid", "3. Sahl"], answer: 0 },
-            { q: "¿Qué significa 'قَرِيب' (Qarib)?", options: ["1. Cerca", "2. Lejos", "3. Fácil"], answer: 0 },
+            { q: "¿Qué significa 'قَرِيب' (Qarib)?", options: ["1. Lejos", "2. Cerca", "3. Fácil"], answer: 1 },
             { q: "¿Qué significa 'بَعِيد' (Ba'id)?", options: ["1. Lejos", "2. Cerca", "3. Difícil"], answer: 0 },
-            { q: "¿Cómo se dice 'Bueno' en árabe?", options: ["1. Jayyid (جَيِّد)", "2. Sayyi'", "3. Sahl"], answer: 0 },
+            { q: "¿Cómo se dice 'Bueno' en árabe?", options: ["1. Sayyi'", "2. Jayyid (جَيِّد)", "3. Sahl"], answer: 1 },
             { q: "¿Cómo se dice 'Malo' en árabe?", options: ["1. Sayyi' (سَيِّئ)", "2. Jayyid", "3. Sa'b"], answer: 0 },
-            { q: "¿Qué significa 'سَهْل' (Sahl)?", options: ["1. Fácil", "2. Difícil", "3. Bueno"], answer: 0 },
+            { q: "¿Qué significa 'سَهْل' (Sahl)?", options: ["1. Difícil", "2. Fácil", "3. Bueno"], answer: 1 },
             { q: "¿Qué significa 'صَعْب' (Sa'b)?", options: ["1. Difícil", "2. Fácil", "3. Nuevo"], answer: 0 },
-            { q: "¿Cómo se dice 'Bolígrafo / Lápiz' en árabe?", options: ["1. Qalam (قَلَم)", "2. Kitab", "3. Mal"], answer: 0 },
+            { q: "¿Cómo se dice 'Bolígrafo / Lápiz' en árabe?", options: ["1. Kitab", "2. Qalam (قَلَم)", "3. Mal"], answer: 1 },
             { q: "¿Cómo se dice 'Coche' en árabe?", options: ["1. Sayyara (سَيَّارَة)", "2. Hafila", "3. Matar"], answer: 0 },
-            { q: "¿Qué es una 'حَافِلَة' (Hafila)?", options: ["1. Autobús", "2. Coche", "3. Casa"], answer: 0 },
+            { q: "¿Qué es una 'حَافِلَة' (Hafila)?", options: ["1. Coche", "2. Autobús", "3. Casa"], answer: 1 },
             { q: "¿Cómo se dice 'Dinero' en árabe?", options: ["1. Mal (مَال)", "2. 'Amal", "3. Qalam"], answer: 0 },
-            { q: "¿Qué significa 'عَمَل' ('Amal)?", options: ["1. Trabajo", "2. Dinero", "3. Escuela"], answer: 0 },
-            { q: "¿Qué verbo es 'شَرِبَ' (Shariba)?", options: ["1. Beber", "2. Comer", "3. Venir"], answer: 0 },
-            { q: "¿Qué verbo es 'ذَهَبَ' (Dhahaba)?", options: ["1. Ir", "2. Venir", "3. Saber"], answer: 0 },
-            { q: "¿Qué verbo es 'جَاءَ' (Ja'a)?", options: ["1. Venir", "2. Ir", "3. Beber"], answer: 0 },
-            { q: "¿Qué significa el verbo 'عَرَفَ' ('Arafa)?", options: ["1. Saber / Conocer", "2. Comer", "3. Ir"], answer: 0 },
-            { q: "¿Cómo se dice el número 1 en árabe?", options: ["1. Wahid (وَاحِد)", "2. Ithnan", "3. Thalatha"], answer: 0 },
-            { q: "¿Cómo se dice el número 2 en árabe?", options: ["1. Ithnan (اِثْنَان)", "2. Wahid", "3. Arba'a"], answer: 0 }
+            { q: "¿Qué significa 'عَمَل' ('Amal)?", options: ["1. Dinero", "2. Trabajo", "3. Escuela"], answer: 1 },
+            { q: "¿Qué número representa 'خَمْسُون' (Khamsun)?", options: ["1. 40", "2. 50", "3. 60"], answer: 1 },
+            { q: "¿Cómo se dice el número 100 en árabe?", options: ["1. Mi'a (مِئَة)", "2. Tis'un", "3. Thamanun"], answer: 0 },
+            { q: "¿Cuál es la primera letra del alfabeto árabe?", options: ["1. Bā'", "2. Alif (أ)", "3. Tā'"], answer: 1 },
+            { q: "¿Cuál es la última letra del alfabeto árabe?", options: ["1. Yā' (ي)", "2. Wāw", "3. Nūn"], answer: 0 },
+            { q: "¿Qué letra emite el sonido de una 'J' o 'Kh' fuerte en español?", options: ["1. Ḥā'", "2. Khā' (خ)", "3. Jīm"], answer: 1 }
         ];
 
         let currentQuizIndex = 0;
@@ -642,6 +700,8 @@ Reglas de respuesta:
 
         document.addEventListener('DOMContentLoaded', () => {
             updateStats();
+            renderAlphabetGrid();
+            renderNumbersGrid();
             renderFlashcard();
             renderDictionary();
             renderQuiz();
@@ -664,6 +724,37 @@ Reglas de respuesta:
         function toggleLessonDetail(id) {
             const el = document.getElementById(id);
             if (el) el.classList.toggle('hidden');
+        }
+
+        function renderAlphabetGrid() {
+            const container = document.getElementById('alphabetGrid');
+            container.innerHTML = '';
+            fullAlphabet.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center border border-slate-200 dark:border-slate-700 hover:border-emerald-500 transition cursor-pointer';
+                div.onclick = () => speakText(item.letter);
+                div.innerHTML = `
+                    <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">${item.letter}</span>
+                    <p class="font-bold text-xs mt-1 text-slate-700 dark:text-slate-200">${item.name}</p>
+                    <p class="text-[10px] text-slate-400">${item.sound}</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function renderNumbersGrid() {
+            const container = document.getElementById('numbersGrid');
+            container.innerHTML = '';
+            fullNumbers.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center border border-slate-200 dark:border-slate-700 hover:border-emerald-500 transition cursor-pointer';
+                div.onclick = () => speakText(item.ar.split('-')[1].trim());
+                div.innerHTML = `
+                    <span class="text-lg font-bold arabic-text text-emerald-600 dark:text-emerald-400 block">${item.ar}</span>
+                    <p class="font-semibold text-xs text-slate-500 dark:text-slate-300 mt-0.5">${item.phonetic}</p>
+                `;
+                container.appendChild(div);
+            });
         }
 
         function updateStats() {
@@ -743,10 +834,10 @@ Reglas de respuesta:
         }
 
         function filterDict() {
-            const query = document.getElementById('dictSearch').value.toLowerCase();
+            const query = document.getElementById('dictSearch').value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const rows = document.querySelectorAll('#dictTableBody tr');
             rows.forEach(row => {
-                const text = row.innerText.toLowerCase();
+                const text = row.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 row.style.display = text.includes(query) ? '' : 'none';
             });
         }
@@ -794,7 +885,7 @@ Reglas de respuesta:
             renderQuiz();
         }
 
-        async function sendMessage() {
+        function sendMessage() {
             const input = document.getElementById('chatInput');
             const userMsg = input.value.trim();
             if (!userMsg) return;
@@ -811,88 +902,60 @@ Reglas de respuesta:
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            const loadingId = 'loading-' + Date.now();
-            chatBox.innerHTML += `
-                <div id="${loadingId}" class="flex items-start space-x-3">
-                    <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
-                    </div>
-                    <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm flex items-center gap-2 text-slate-500">
-                        <i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i>
-                        <span>Reham está procesando tu respuesta...</span>
-                    </div>
-                </div>
-            `;
-            chatBox.scrollTop = chatBox.scrollHeight;
+            const replyText = getLessonAssistantResponse(userMsg);
+            const renderedHtml = typeof marked !== 'undefined' ? marked.parse(replyText) : replyText;
 
-            let replyText = "";
-
-            try {
-                replyText = await fetchGeminiResponse(userMsg);
-            } catch (error) {
-                console.log("Error al conectar con la API, usando respuesta de respaldo:", error);
-                await new Promise(r => setTimeout(r, 400));
-                replyText = getSmartFallbackResponse(userMsg);
-            }
-
-            const loadingElem = document.getElementById(loadingId);
-            if (loadingElem) loadingElem.remove();
-
-            const renderedHtml = marked.parse(replyText);
-            chatBox.innerHTML += `
-                <div class="flex items-start space-x-3">
-                    <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
-                    </div>
-                    <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
-                        <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
-                        <div class="prose dark:prose-invert text-slate-800 dark:text-slate-100 text-sm">
-                            ${renderedHtml}
+            setTimeout(() => {
+                chatBox.innerHTML += `
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
+                            <img src="REHAM%20%20%D8%B1%D9%8A%D9%87%D8%A7%D9%85.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
+                        </div>
+                        <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
+                            <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Asistente Lecciones</p>
+                            <div class="prose dark:prose-invert text-slate-800 dark:text-slate-100 text-sm">
+                                ${renderedHtml}
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-            chatBox.scrollTop = chatBox.scrollHeight;
-            addXP(1);
+                `;
+                chatBox.scrollTop = chatBox.scrollHeight;
+                addXP(1);
+            }, 300);
         }
 
-        async function fetchGeminiResponse(userQuery) {
-            chatHistory.push({ role: "user", parts: [{ text: userQuery }] });
+        function getLessonAssistantResponse(msg) {
+            const lower = msg.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-            const response = await fetch(PROXY_URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
-                    userQuery: userQuery,
-                    history: chatHistory.slice(-8)
-                })
+            const vocabMatch = vocabulary.find(item => {
+                const es = item.spanish.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const ph = item.phonetic.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                return lower.includes(es) || lower.includes(ph) || msg.includes(item.arabic);
             });
 
-            if (!response.ok) {
-                throw new Error(`Error HTTP: ${response.status}`);
+            if (vocabMatch) {
+                return `**Resultado en la lección de vocabulario:**\n\n* **Árabe:** ${vocabMatch.arabic}\n* **Pronunciación:** *${vocabMatch.phonetic}*\n* **Español:** ${vocabMatch.spanish}\n* **Nota:** ${vocabMatch.context}`;
             }
 
-            const data = await response.json();
-            const textResult = data.reply || "No se pudo obtener respuesta.";
-
-            chatHistory.push({ role: "model", parts: [{ text: textResult }] });
-
-            return textResult;
-        }
-
-        function getSmartFallbackResponse(msg) {
-            const lower = msg.toLowerCase();
-            if (lower.includes('amor') || lower.includes('habibi') || lower.includes('cariño')) {
-                return `En árabe existen varias expresiones hermosas para transmitir cariño:\n\n* **يا حَبيبي** (*Ya Habibi*) — "Mi amor" (dirigido a un hombre).\n* **يا حَبيبتي** (*Ya Habibti*) — "Mi amor" (dirigido a una mujer).\n* **يا عُمري** (*Ya 'Omri*) — "Mi vida".\n* **يا قَلبي** (*Ya Qalbi*) — "Mi corazón".\n\n💡 *Variante poética:* **يا نُور عَيْني** (*Ya Nur 'Ayni*), que significa *"Luz de mis ojos"*.`;
-            } else if (lower.includes('gracias') || lower.includes('de nada')) {
-                return `Para dar las gracias se utiliza **شُكْرًا** (*Shukran*) y para responder "de nada" se dice **عَفْوًا** (*'Afwan*).\n\nSi quieres dar un agradecimiento más formal o profundo, puedes decir **شُكْرًا جَزيلاً** (*Shukran Jazeelan*) — *"Muchas gracias"*.`;
-            } else if (lower.includes('restaurante') || lower.includes('comida')) {
-                return `Frases esenciales para un restaurante árabe:\n\n1. **أُاريدُ هَذا مِنْ فَضْلِك** (*Ureedu hadha min fadlik*) — *"Quiero esto, por favor"*.\n2. **القَائِمَة مِنْ فَضْلِك** (*Al-qa'imah min fadlik*) — *"La carta/menú, por favor"*.\n3. **الحِساب مِنْ فَضْلِك** (*Al-hisab min fadlik*) — *"La cuenta, por favor"*.`;
-            } else if (lower.includes('marroqui') || lower.includes('darija') || lower.includes('clasico') || lower.includes('dialecto')) {
-                return `El árabe clásico o Árabe Estándar Moderno (**Fusha / الفصحى**) es la lengua oficial utilizada en libros, noticias y educación en todo el mundo árabe.\n\nPor otro lado, el **Darija (الدارجة)** es el dialecto hablado cotidiano en Marruecos, con fuerte influencia del amazigh (bereber), francés y español.`;
-            } else {
-                return `¡Excelente pregunta! En árabe clásico (Fusha) es muy importante la pronunciación correcta de los sonidos vocálicos. ¿Quieres practicar algún vocabulario o frase en específico con la Profesora Reham?`;
+            const numberMatches = lower.match(/\d+/);
+            if (numberMatches) {
+                const val = parseInt(numberMatches[0]);
+                const numItem = fullNumbers.find(n => n.num === val);
+                if (numItem) {
+                    return `**Número encontrado en la lección:**\n\n* **Número:** ${numItem.num}\n* **Árabe:** ${numItem.ar}\n* **Pronunciación:** *${numItem.phonetic}*`;
+                }
             }
+
+            if (lower.includes('alfabeto') || lower.includes('letra') || lower.includes('alifato')) {
+                const sample = fullAlphabet.slice(0, 5).map(a => `* **${a.letter}** (${a.name}): Sonido *${a.sound}*`).join('\n');
+                return `El alfabeto cuenta con **28 letras**. Puedes consultarlas todas en la sección de lecciones.\n\nAquí tienes las primeras letras:\n${sample}`;
+            }
+
+            if (lower.includes('numero') || lower.includes('numeros') || lower.includes('contar')) {
+                return `Las lecciones incluyen la lista de los **números del 1 al 100** con sus correspondientes nombres en árabe y fonética. Puedes desplegar la lección desde la pestaña principal.`;
+            }
+
+            return `Puedo ayudarte a buscar dentro de las lecciones del curso. Intenta preguntarme por una palabra específica (como *"hola"*, *"gracias"*, *"casa"*), un número (del 1 al 100) o información sobre el alfabeto.`;
         }
 
         function sendQuickPrompt(promptText) {
