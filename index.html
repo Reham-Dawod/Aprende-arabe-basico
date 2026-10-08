@@ -62,7 +62,7 @@
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased transition-colors duration-200">
 
-    <!-- Header / Navegación Superior -->
+    <!-- Top Navigation Header -->
     <header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 glass-panel">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <!-- Botones de Navegación -->
+            <!-- Navigation Tabs -->
             <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
                 <button onclick="switchTab('lessons')" id="tab-lessons" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50">
                     <i class="fa-solid fa-book-open"></i> Lecciones
@@ -97,7 +97,7 @@
                 </button>
             </nav>
 
-            <!-- Estadísticas y Tema -->
+            <!-- Stats & Theme Toggle -->
             <div class="flex items-center space-x-3">
                 <div class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-700 dark:text-amber-300">
                     <i class="fa-solid fa-fire text-amber-500"></i>
@@ -115,10 +115,10 @@
         </div>
     </header>
 
-    <!-- Contenido Principal -->
+    <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 
-        <!-- 1. SECCIÓN LECCIONES -->
+        <!-- 1. LECCIONES SECTION -->
         <section id="sec-lessons" class="tab-content space-y-6">
             <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
                 <div class="relative z-10 max-w-xl">
@@ -164,7 +164,7 @@
             </div>
         </section>
 
-        <!-- 2. SECCIÓN TARJETAS (FLASHCARDS) -->
+        <!-- 2. FLASHCARDS SECTION -->
         <section id="sec-flashcards" class="tab-content hidden max-w-xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-2xl font-bold mb-1">Tarjetas de Vocabulario</h2>
@@ -192,7 +192,7 @@
             </div>
         </section>
 
-        <!-- 3. SECCIÓN QUIZ -->
+        <!-- 3. QUIZ SECTION -->
         <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
                 <div class="flex justify-between items-center mb-4">
@@ -203,12 +203,12 @@
                 <h3 id="quizQuestion" class="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">¿Qué significa la palabra "يا عُمري" (Ya Omri)?</h3>
 
                 <div id="quizOptions" class="space-y-3">
-                    <!-- Opciones dinámicas -->
+                    <!-- Dinámico -->
                 </div>
             </div>
         </section>
 
-        <!-- 4. SECCIÓN DICCIONARIO -->
+        <!-- 4. DICTIONARY SECTION -->
         <section id="sec-dictionary" class="tab-content hidden space-y-6">
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
                 <div class="relative w-full sm:w-96">
@@ -230,14 +230,14 @@
                             </tr>
                         </thead>
                         <tbody id="dictTableBody" class="divide-y divide-slate-200 dark:divide-slate-700 text-sm">
-                            <!-- Filas dinámicas -->
+                            <!-- Populated dynamically -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- 5. SECCIÓN IA TUTOR -->
+        <!-- 5. AI TUTOR SECTION -->
         <section id="sec-ai-tutor" class="tab-content hidden space-y-4">
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-md flex flex-col h-[650px]">
                 
@@ -270,7 +270,7 @@
                         </div>
                         <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
                             <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
-                            <p class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu profesora personal de árabe. La asistente de IA está lista. Puedes preguntarme cualquier duda sobre traducción, gramática o dialectos.</p>
+                            <p class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu profesora personal de árabe. Puedes preguntarme cualquier duda sobre traducción, gramática o dialectos.</p>
                         </div>
                     </div>
                 </div>
@@ -296,6 +296,17 @@
 
     <!-- JavaScript Application Logic -->
     <script>
+        // URL configurada de la función backend en Vercel
+        const PROXY_URL = "https://proyecto-sage-ten-57.vercel.app/api/chat";
+
+        const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
+Reglas de respuesta:
+1. Responde siempre en español fluido.
+2. Cada vez que incluyas una palabra o frase en árabe, pon la escritura en alfabeto árabe (con vocalización diacrítica/harakat cuando sea útil), seguida inmediatamente de su transliteración/pronunciación en fonética latina entre paréntesis o cursiva, y su traducción al español.
+3. Si el usuario pregunta por dialectos (marroquí, egipcio, levantino), explica amablemente la diferencia con el Árabe Estándar Moderno (Fusha).
+4. Mantén un tono cálido, alentador y profesional.
+5. Utiliza formato Markdown con negritas y viñetas para que la explicación sea fácil de leer.`;
+
         let chatHistory = [];
         let currentTab = 'lessons';
         let xp = parseInt(localStorage.getItem('reham_xp') || '0');
@@ -492,7 +503,7 @@
             chatBox.innerHTML += `
                 <div id="${loadingId}" class="flex items-start space-x-3">
                     <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\\'>ر</div>';">
+                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
                     </div>
                     <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm flex items-center gap-2 text-slate-500">
                         <i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i>
@@ -505,11 +516,10 @@
             let replyText = "";
 
             try {
-                chatHistory.push({ role: "user", parts: [{ text: userMsg }] });
-                replyText = await fetchBackendResponse(userMsg);
-                chatHistory.push({ role: "model", parts: [{ text: replyText }] });
+                replyText = await fetchGeminiResponse(userMsg);
             } catch (error) {
-                console.error("Error al conectar con la API, usando respuesta de respaldo:", error);
+                console.log("Error al conectar con la API, usando respuesta de respaldo:", error);
+                await new Promise(r => setTimeout(r, 400));
                 replyText = getSmartFallbackResponse(userMsg);
             }
 
@@ -520,7 +530,7 @@
             chatBox.innerHTML += `
                 <div class="flex items-start space-x-3">
                     <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
-                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\\'>ر</div>';">
+                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
                     </div>
                     <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
                         <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
@@ -534,16 +544,25 @@
             addXP(1);
         }
 
-        async function fetchBackendResponse(userQuery) {
-            const BACKEND_URL = "/api/chat";
+        async function fetchGeminiResponse(userQuery) {
+            chatHistory.push({ role: "user", parts: [{ text: userQuery }] });
 
-            const response = await fetch(BACKEND_URL, {
+            const contents = [
+                {
+                    role: "user",
+                    parts: [{ text: SYSTEM_PROMPT }]
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "¡Comprendido! Asumo mi rol como la Profesora Reham. Responderé con claridad, calidez y formato estructurado en árabe, fonética y español." }]
+                },
+                ...chatHistory.slice(-8)
+            ];
+
+            const response = await fetch(PROXY_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    userQuery: userQuery,
-                    history: chatHistory
-                })
+                body: JSON.stringify({ contents: contents })
             });
 
             if (!response.ok) {
@@ -551,7 +570,11 @@
             }
 
             const data = await response.json();
-            return data.reply;
+            const textResult = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo obtener respuesta.";
+
+            chatHistory.push({ role: "model", parts: [{ text: textResult }] });
+
+            return textResult;
         }
 
         function getSmartFallbackResponse(msg) {
