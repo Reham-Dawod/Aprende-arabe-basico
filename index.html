@@ -124,42 +124,145 @@
                 <div class="relative z-10 max-w-xl">
                     <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Módulo 1: Fundamentos</span>
                     <h2 class="text-2xl font-bold mb-1">¡Aprende Árabe con la Profesora Reham!</h2>
-                    <p class="text-emerald-100 text-sm mb-4">Domina el alfabeto, frases esenciales, saludos y dialectos con lecciones interactivas.</p>
+                    <p class="text-emerald-100 text-sm mb-4">Domina el alfabeto, los números, frases esenciales y cortesía con lecciones interactivas.</p>
                     <div class="w-full bg-emerald-900/50 rounded-full h-2.5 overflow-hidden">
-                        <div id="progressBar" class="bg-amber-400 h-2.5 rounded-full transition-all duration-300" style="width: 15%"></div>
+                        <div id="progressBar" class="bg-amber-400 h-2.5 rounded-full transition-all duration-300" style="width: 25%"></div>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Tarjeta Lección Alfabeto -->
                 <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
                     <div class="flex justify-between items-start mb-3">
-                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-language"></i></span>
+                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-font"></i></span>
                         <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">10 XP</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">El Alfabeto y Pronunciación</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende las primeras letras del alifato y los sonidos característicos del árabe.</p>
-                    <button onclick="startLesson('alphabet')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Iniciar Lección</button>
+                    <h3 class="font-bold text-lg mb-1">El Alfabeto Árabe</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Conoce las letras principales del alifato y su sonido.</p>
+                    <button onclick="toggleLessonDetail('alphabet-detail')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ver Alfabeto</button>
                 </div>
 
+                <!-- Tarjeta Lección Números -->
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-list-ol"></i></span>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">10 XP</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Los Números (1 - 10)</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende a contar del 1 al 10 en árabe estándar.</p>
+                    <button onclick="toggleLessonDetail('numbers-detail')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ver Números</button>
+                </div>
+
+                <!-- Tarjeta Vocabulario -->
                 <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
                     <div class="flex justify-between items-start mb-3">
                         <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-comments"></i></span>
-                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">15 XP</span>
-                    </div>
-                    <h3 class="font-bold text-lg mb-1">Saludos y Cortesía</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende a saludar, presentarte y responder cortesmente en árabe clásico.</p>
-                    <button onclick="startLesson('greetings')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Iniciar Lección</button>
-                </div>
-
-                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
-                    <div class="flex justify-between items-start mb-3">
-                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-heart"></i></span>
                         <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">20 XP</span>
                     </div>
-                    <h3 class="font-bold text-lg mb-1">Expresiones Bonitas y Cariño</h3>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende expresiones como Ya Habibi, Ya Omri, Ya Qalbi y más.</p>
-                    <button onclick="startLesson('affection')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Iniciar Lección</button>
+                    <h3 class="font-bold text-lg mb-1">Vocabulario Básico (100)</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Practica 100 palabras esenciales con flashcards interactivas.</p>
+                    <button onclick="switchTab('flashcards')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Ir a Tarjetas</button>
+                </div>
+            </div>
+
+            <!-- DETALLE: Alfabeto -->
+            <div id="alphabet-detail" class="hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-700">
+                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-font mr-2"></i> Alfabeto Árabe (Las primeras 10 letras)</h3>
+                    <button onclick="toggleLessonDetail('alphabet-detail')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">أ</span>
+                        <p class="font-semibold text-sm mt-1">Alif (A)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ب</span>
+                        <p class="font-semibold text-sm mt-1">Bā' (B)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ت</span>
+                        <p class="font-semibold text-sm mt-1">Tā' (T)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ث</span>
+                        <p class="font-semibold text-sm mt-1">Thā' (Th)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ج</span>
+                        <p class="font-semibold text-sm mt-1">Jīm (J)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ح</span>
+                        <p class="font-semibold text-sm mt-1">Ḥā' (H fuerte)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">خ</span>
+                        <p class="font-semibold text-sm mt-1">Khā' (Kh / J)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">د</span>
+                        <p class="font-semibold text-sm mt-1">Dāl (D)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ذ</span>
+                        <p class="font-semibold text-sm mt-1">Dhāl (Dh)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-3xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">ر</span>
+                        <p class="font-semibold text-sm mt-1">Rā' (R)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETALLE: Números -->
+            <div id="numbers-detail" class="hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 space-y-4">
+                <div class="flex justify-between items-center border-b pb-3 border-slate-200 dark:border-slate-700">
+                    <h3 class="font-bold text-xl text-emerald-600 dark:text-emerald-400"><i class="fa-solid fa-list-ol mr-2"></i> Números del 1 al 10 en Árabe</h3>
+                    <button onclick="toggleLessonDetail('numbers-detail')" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">١ - وَاحِد</span>
+                        <p class="font-semibold text-xs mt-1">Wahid (1)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٢ - اِثْنَان</span>
+                        <p class="font-semibold text-xs mt-1">Ithnan (2)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٣ - ثَلَاثَة</span>
+                        <p class="font-semibold text-xs mt-1">Thalatha (3)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٤ - أَرْبَعَة</span>
+                        <p class="font-semibold text-xs mt-1">Arba'a (4)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٥ - خَمْسَة</span>
+                        <p class="font-semibold text-xs mt-1">Khamsa (5)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٦ - سِتَّة</span>
+                        <p class="font-semibold text-xs mt-1">Sitta (6)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٧ - سَبْعَة</span>
+                        <p class="font-semibold text-xs mt-1">Sab'a (7)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٨ - ثَمَانِيَة</span>
+                        <p class="font-semibold text-xs mt-1">Thamaniya (8)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">٩ - تِسْعَة</span>
+                        <p class="font-semibold text-xs mt-1">Tis'a (9)</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-xl text-center">
+                        <span class="text-2xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">١٠ - عَشَرَة</span>
+                        <p class="font-semibold text-xs mt-1">'Ashara (10)</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -168,7 +271,7 @@
         <section id="sec-flashcards" class="tab-content hidden max-w-xl mx-auto space-y-6">
             <div class="text-center">
                 <h2 class="text-2xl font-bold mb-1">Tarjetas de Vocabulario</h2>
-                <p class="text-slate-500 dark:text-slate-400 text-sm">Practica la memoria y pronunciación con cada tarjeta.</p>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Tarjeta <span id="fcNum">1</span> de 100 - Practica la memoria y pronunciación.</p>
             </div>
 
             <div id="flashcard" onclick="flipCard()" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 min-h-[260px] flex flex-col items-center justify-center text-center shadow-lg cursor-pointer transition-all transform hover:scale-[1.01] relative">
@@ -192,15 +295,15 @@
             </div>
         </section>
 
-        <!-- 3. QUIZ SECTION -->
+        <!-- 3. QUIZ SECTION (10 PREGUNTAS) -->
         <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">Pregunta <span id="quizNum">1</span> de 3</span>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">Pregunta <span id="quizNum">1</span> de 10</span>
                     <span class="text-xs text-slate-400" id="quizScore">Puntos: 0</span>
                 </div>
 
-                <h3 id="quizQuestion" class="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">¿Qué significa la palabra "يا عُمري" (Ya Omri)?</h3>
+                <h3 id="quizQuestion" class="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">Cargando pregunta...</h3>
 
                 <div id="quizOptions" class="space-y-3">
                     <!-- Dinámico -->
@@ -215,7 +318,7 @@
                     <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
                     <input type="text" id="dictSearch" onkeyup="filterDict()" placeholder="Buscar en árabe, fonética o español..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
                 </div>
-                <span class="text-xs text-slate-400">Mostrando vocabulario de árabe básico</span>
+                <span class="text-xs text-slate-400">Mostrando vocabulario de árabe básico (100 palabras)</span>
             </div>
 
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-md">
@@ -296,7 +399,6 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        // URL configurada de la función backend en Vercel
         const PROXY_URL = "https://proyecto-sage-ten-57.vercel.app/api/chat";
 
         const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
@@ -417,23 +519,20 @@ Reglas de respuesta:
             { arabic: 'عَرَفَ', phonetic: '\'Arafa', spanish: 'Saber / Conocer', context: 'Acción / Verbo.' }
         ];
 
+        // QUIZ EXPANDIDO A 10 PREGUNTAS
         const quizQuestions = [
-            {
-                q: "¿Qué significa la expresión 'يا عُمري' (Ya Omri)?",
-                options: ["1. Mi corazón", "2. Mi vida", "3. Mi alma"],
-                answer: 1
-            },
-            {
-                q: "¿Cuál es la respuesta adecuada a 'Shukran' (شُكْرًا)?",
-                options: ["1. Afwan (عَفْوًا)", "2. Marhaban (مَرْحَبًا)", "3. Ahlan (أَهْلًا)"],
-                answer: 0
-            },
-            {
-                q: "¿Qué representa el nombre 'Reham' (رِهَام) en árabe?",
-                options: ["1. La luz del sol", "2. Llovizna suave y constante", "3. Una flor del desierto"],
-                answer: 1
-            }
+            { q: "¿Qué significa la expresión 'شُكْرًا' (Shukran)?", options: ["1. Por favor", "2. Gracias", "3. Hola"], answer: 1 },
+            { q: "¿Cuál es la respuesta adecuada a 'Shukran'?", options: ["1. 'Afwan (عَفْوًا)", "2. Marhaban (مَرْحَبًا)", "3. Ahlan (أَهْلًا)"], answer: 0 },
+            { q: "¿Cómo se dice 'Padre' en árabe?", options: ["1. Umm (أُمّ)", "2. Akh (أَخ)", "3. Ab (أَب)"], answer: 2 },
+            { q: "¿Qué significa 'مَاء' (Ma')?", options: ["1. Pan", "2. Agua", "3. Té"], answer: 1 },
+            { q: "¿Cómo se dice el número 5 en árabe?", options: ["1. Khamsa (خَمْسَة)", "2. Wahid (وَاحِد)", "3. Sitta (سِتَّة)"], answer: 0 },
+            { q: "¿Qué pides en un restaurante si dices 'كِتَاب' (Kitab)?", options: ["1. Comida", "2. Un libro", "3. La cuenta"], answer: 1 },
+            { q: "¿Qué pronombre significa 'Nosotros / Nosotras'?", options: ["1. Ana (أَنَا)", "2. Nahnu (نَحْنُ)", "3. Hum (هُمْ)"], answer: 1 },
+            { q: "¿Cómo se dice 'Mañana' en árabe?", options: ["1. Ams (أَمْس)", "2. Al-yawm (الْيَوْم)", "3. Ghadan (غَدًا)"], answer: 2 },
+            { q: "¿Qué significa 'بَيْت' (Bayt)?", options: ["1. Casa", "2. Ciudad", "3. Escuela"], answer: 0 },
+            { q: "¿Cuál es la traducción del verbo 'أَكَلَ' (Akala)?", options: ["1. Beber", "2. Comer", "3. Ir"], answer: 1 }
         ];
+
         let currentQuizIndex = 0;
         let quizScore = 0;
 
@@ -458,6 +557,11 @@ Reglas de respuesta:
             }
         }
 
+        function toggleLessonDetail(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('hidden');
+        }
+
         function updateStats() {
             document.getElementById('xpCount').innerText = `${xp} XP`;
             document.getElementById('streakCount').innerText = `${streak} d`;
@@ -472,6 +576,7 @@ Reglas de respuesta:
 
         function renderFlashcard() {
             const item = vocabulary[cardIndex];
+            document.getElementById('fcNum').innerText = cardIndex + 1;
             document.getElementById('fcArabic').innerText = item.arabic;
             document.getElementById('fcPhonetic').innerText = item.phonetic;
             document.getElementById('fcSpanish').innerText = item.spanish;
