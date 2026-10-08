@@ -295,11 +295,11 @@
             </div>
         </section>
 
-        <!-- 3. QUIZ SECTION (10 PREGUNTAS) -->
+        <!-- 3. QUIZ SECTION (100 PREGUNTAS) -->
         <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
             <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
                 <div class="flex justify-between items-center mb-4">
-                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">Pregunta <span id="quizNum">1</span> de 10</span>
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">Pregunta <span id="quizNum">1</span> de 100</span>
                     <span class="text-xs text-slate-400" id="quizScore">Puntos: 0</span>
                 </div>
 
@@ -519,18 +519,108 @@ Reglas de respuesta:
             { arabic: 'عَرَفَ', phonetic: '\'Arafa', spanish: 'Saber / Conocer', context: 'Acción / Verbo.' }
         ];
 
-        // QUIZ EXPANDIDO A 10 PREGUNTAS
+        // QUIZ EXPANDIDO A 100 PREGUNTAS
         const quizQuestions = [
             { q: "¿Qué significa la expresión 'شُكْرًا' (Shukran)?", options: ["1. Por favor", "2. Gracias", "3. Hola"], answer: 1 },
             { q: "¿Cuál es la respuesta adecuada a 'Shukran'?", options: ["1. 'Afwan (عَفْوًا)", "2. Marhaban (مَرْحَبًا)", "3. Ahlan (أَهْلًا)"], answer: 0 },
             { q: "¿Cómo se dice 'Padre' en árabe?", options: ["1. Umm (أُمّ)", "2. Akh (أَخ)", "3. Ab (أَب)"], answer: 2 },
             { q: "¿Qué significa 'مَاء' (Ma')?", options: ["1. Pan", "2. Agua", "3. Té"], answer: 1 },
             { q: "¿Cómo se dice el número 5 en árabe?", options: ["1. Khamsa (خَمْسَة)", "2. Wahid (وَاحِد)", "3. Sitta (سِتَّة)"], answer: 0 },
-            { q: "¿Qué pides en un restaurante si dices 'كِتَاب' (Kitab)?", options: ["1. Comida", "2. Un libro", "3. La cuenta"], answer: 1 },
+            { q: "¿Qué pides si dices 'كِتَاب' (Kitab)?", options: ["1. Comida", "2. Un libro", "3. La cuenta"], answer: 1 },
             { q: "¿Qué pronombre significa 'Nosotros / Nosotras'?", options: ["1. Ana (أَنَا)", "2. Nahnu (نَحْنُ)", "3. Hum (هُمْ)"], answer: 1 },
             { q: "¿Cómo se dice 'Mañana' en árabe?", options: ["1. Ams (أَمْس)", "2. Al-yawm (الْيَوْم)", "3. Ghadan (غَدًا)"], answer: 2 },
             { q: "¿Qué significa 'بَيْت' (Bayt)?", options: ["1. Casa", "2. Ciudad", "3. Escuela"], answer: 0 },
-            { q: "¿Cuál es la traducción del verbo 'أَكَلَ' (Akala)?", options: ["1. Beber", "2. Comer", "3. Ir"], answer: 1 }
+            { q: "¿Cuál es la traducción del verbo 'أَكَلَ' (Akala)?", options: ["1. Beber", "2. Comer", "3. Ir"], answer: 1 },
+            { q: "¿Qué significa 'مَرْحَبًا' (Marhaban)?", options: ["1. Adiós", "2. Hola", "3. De nada"], answer: 1 },
+            { q: "¿Cómo se dice 'Madre' en árabe?", options: ["1. Umm (أُمّ)", "2. Ukht (أُخْت)", "3. Ibna (ابْنَة)"], answer: 0 },
+            { q: "¿Qué significa 'نَعَمْ' (Na'am)?", options: ["1. No", "2. Tal vez", "3. Sí"], answer: 2 },
+            { q: "¿Qué significa 'لَا' (La)?", options: ["1. No", "2. Sí", "3. Por favor"], answer: 0 },
+            { q: "¿Cómo se dice 'Por favor' en árabe?", options: ["1. Min fadlik (مِنْ فَضْلِك)", "2. Shukran (شُكْرًا)", "3. Asif (آسِف)"], answer: 0 },
+            { q: "¿Qué significa 'آسِف' (Asif)?", options: ["1. Gracias", "2. Lo siento", "3. Hola"], answer: 1 },
+            { q: "¿Cómo se saluda por la mañana ('Buenos días')?", options: ["1. Masa' al-khayr", "2. Sabah al-khayr (صَبَاح الْخَيْر)", "3. Layla sa'ida"], answer: 1 },
+            { q: "¿Cómo se dice 'Buenas tardes' en árabe?", options: ["1. Sabah al-khayr", "2. Masa' al-khayr (مَسَاء الْخَيْر)", "3. Marhaban"], answer: 1 },
+            { q: "¿Qué significa 'لَيْلَة سَعِيدَة' (Layla sa'ida)?", options: ["1. Buenos días", "2. Buenas noches", "3. Adiós"], answer: 1 },
+            { q: "¿Cómo preguntas '¿Cómo estás?' en árabe?", options: ["1. Kayfa haluk? (كَيْفَ حَالُك؟)", "2. Masmuk?", "3. Ayna...?"], answer: 0 },
+            { q: "¿Qué respondes si te preguntan 'Kayfa haluk'?", options: ["1. Bi-khayr (بِخَيْر)", "2. Shukran", "3. La"], answer: 0 },
+            { q: "¿Cómo preguntas '¿Cómo te llamas?'?", options: ["1. Masmuk? (مَا اسْمُك؟)", "2. Man...?", "3. Limadha...?"], answer: 0 },
+            { q: "¿Cómo dices 'Mi nombre es...'?", options: ["1. Ismi... (اسْمِي...)", "2. Ana...", "3. Hadha..."], answer: 0 },
+            { q: "¿Qué significa 'تَشَرَّفْنَا' (Tasharrafna)?", options: ["1. De nada", "2. Mucho gusto", "3. Adiós"], answer: 1 },
+            { q: "¿Qué palabra interrogativa significa '¿Dónde está...?'?", options: ["1. Ayna...? (أَيْنَ...؟)", "2. Madha...?", "3. Man...?"], answer: 0 },
+            { q: "¿Qué significa 'مَاذَا...؟' (Madha...?)", options: ["1. ¿Qué...?", "2. ¿Quién...?", "3. ¿Cuándo...?"], answer: 0 },
+            { q: "¿Qué significa 'مَنْ...؟' (Man...?)", options: ["1. ¿Quién...?", "2. ¿Dónde...?", "3. ¿Por qué...?"], answer: 0 },
+            { q: "¿Cómo se dice '¿Por qué...?' en árabe?", options: ["1. Limadha...? (لِمَاذَا...؟)", "2. Kam...?", "3. Mata...?"], answer: 0 },
+            { q: "¿Qué significa 'كَمْ...؟' (Kam...?)", options: ["1. ¿Cuándo...?", "2. ¿Cuánto / Cuántos...?", "3. ¿Qué...?"], answer: 1 },
+            { q: "¿Qué significa 'مَتَى...؟' (Mata...?)", options: ["1. ¿Cuándo...?", "2. ¿Dónde...?", "3. ¿Quién...?"], answer: 0 },
+            { q: "¿Cómo se dice 'Yo' en árabe?", options: ["1. Ana (أَنَا)", "2. Anta", "3. Huwa"], answer: 0 },
+            { q: "¿Qué pronombre es 'Tú' (masculino)?", options: ["1. Anta (أَنْتَ)", "2. Anti", "3. Hiya"], answer: 0 },
+            { q: "¿Qué pronombre es 'Tú' (femenino)?", options: ["1. Anti (أَنْتِ)", "2. Anta", "3. Antum"], answer: 0 },
+            { q: "¿Cómo se dice 'Él' en árabe?", options: ["1. Huwa (هُوَ)", "2. Hiya", "3. Hum"], answer: 0 },
+            { q: "¿Cómo se dice 'Ella' en árabe?", options: ["1. Hiya (هِيَ)", "2. Huwa", "3. Nahnu"], answer: 0 },
+            { q: "¿Qué significa 'أَنْتُمْ' (Antum)?", options: ["1. Vosotros / Ustedes", "2. Ellos", "3. Nosotros"], answer: 0 },
+            { q: "¿Qué significa 'هُمْ' (Hum)?", options: ["1. Ellos / Ellas", "2. Nosotros", "3. Tú"], answer: 0 },
+            { q: "¿Cómo se dice 'Este / Esto' (masculino)?", options: ["1. Hadha (هَذَا)", "2. Hadhihi", "3. Ana"], answer: 0 },
+            { q: "¿Cómo se dice 'Esta' (femenino)?", options: ["1. Hadhihi (هَذِهِ)", "2. Hadha", "3. Huwa"], answer: 0 },
+            { q: "¿Cómo se dice 'Hermano' en árabe?", options: ["1. Akh (أَخ)", "2. Ukht", "3. Ab"], answer: 0 },
+            { q: "¿Cómo se dice 'Hermana' en árabe?", options: ["1. Ukht (أُخْت)", "2. Akh", "3. Umm"], answer: 0 },
+            { q: "¿Qué significa 'ابْن' (Ibn)?", options: ["1. Hijo", "2. Hija", "3. Padre"], answer: 0 },
+            { q: "¿Qué significa 'ابْنَة' (Ibna)?", options: ["1. Hija", "2. Hijo", "3. Madre"], answer: 0 },
+            { q: "¿Cómo se dice 'Familia' en árabe?", options: ["1. 'A'ila (عَائِلَة)", "2. Sadiq", "3. Bayt"], answer: 0 },
+            { q: "¿Qué significa 'صَدِيق' (Sadiq)?", options: ["1. Amigo", "2. Trabajo", "3. Ciudad"], answer: 0 },
+            { q: "¿Cómo se dice 'Hombre' en árabe?", options: ["1. Rajul (رَجُل)", "2. Imra'a", "3. Walad"], answer: 0 },
+            { q: "¿Cómo se dice 'Mujer' en árabe?", options: ["1. Imra'a (امْرَأَة)", "2. Rajul", "3. Bint"], answer: 0 },
+            { q: "¿Qué significa 'وَلَد' (Walad)?", options: ["1. Niño", "2. Niña", "3. Amigo"], answer: 0 },
+            { q: "¿Qué significa 'بِنْت' (Bint)?", options: ["1. Niña / Hija", "2. Niño", "3. Madre"], answer: 0 },
+            { q: "¿Cómo se dice 'Habitación' en árabe?", options: ["1. Ghurfa (غُرْفَة)", "2. Matbakh", "3. Hammam"], answer: 0 },
+            { q: "¿Qué lugar de la casa es 'مَطْبَخ' (Matbakh)?", options: ["1. Cocina", "2. Baño", "3. Habitación"], answer: 0 },
+            { q: "¿Qué lugar de la casa es 'حَمَّام' (Hammam)?", options: ["1. Baño", "2. Cocina", "3. Casa"], answer: 0 },
+            { q: "¿Cómo se dice 'Ciudad' en árabe?", options: ["1. Madina (مَدِينَة)", "2. Shari'", "3. Suq"], answer: 0 },
+            { q: "¿Qué significa 'شَارِع' (Shari')?", options: ["1. Calle", "2. Mercado", "3. Hotel"], answer: 0 },
+            { q: "¿Cómo se dice 'Escuela' en árabe?", options: ["1. Madrasa (مَدْرَسَة)", "2. Jami'a", "3. Mustashfa"], answer: 0 },
+            { q: "¿Qué significa 'جَامِعَة' (Jami'a)?", options: ["1. Universidad", "2. Escuela", "3. Hospital"], answer: 0 },
+            { q: "¿Cómo se dice 'Hospital' en árabe?", options: ["1. Mustashfa (مُسْتَشْفَى)", "2. Funduq", "3. Matar"], answer: 0 },
+            { q: "¿Qué es un 'مَطْعَم' (Mat'am)?", options: ["1. Restaurante", "2. Mercado", "3. Aeropuerto"], answer: 0 },
+            { q: "¿Qué es un 'سُوق' (Suq)?", options: ["1. Mercado", "2. Hotel", "3. Calle"], answer: 0 },
+            { q: "¿Cómo se dice 'Aeropuerto' en árabe?", options: ["1. Matar (مَطَار)", "2. Funduq", "3. Sayyara"], answer: 0 },
+            { q: "¿Qué significa 'فُنْدُق' (Funduq)?", options: ["1. Hotel", "2. Hospital", "3. Casa"], answer: 0 },
+            { q: "¿Cómo se dice 'Pan' en árabe?", options: ["1. Khubz (خُبْز)", "2. Ma'", "3. Ta'am"], answer: 0 },
+            { q: "¿Qué significa 'طَعَام' (Ta'am)?", options: ["1. Comida", "2. Agua", "3. Dinero"], answer: 0 },
+            { q: "¿Cómo se dice 'Café' en árabe?", options: ["1. Qahwa (قَهْوَة)", "2. Shay", "3. Ma'"], answer: 0 },
+            { q: "¿Cómo se dice 'Té' en árabe?", options: ["1. Shay (شَاي)", "2. Qahwa", "3. Khubz"], answer: 0 },
+            { q: "¿Qué significa 'فَوَاكِه' (Fawakih)?", options: ["1. Frutas", "2. Verduras", "3. Carne"], answer: 0 },
+            { q: "¿Qué significa 'خَضْرَوَات' (Khadrawat)?", options: ["1. Verduras", "2. Frutas", "3. Pescado"], answer: 0 },
+            { q: "¿Cómo se dice 'Carne' en árabe?", options: ["1. Lahm (لَحْم)", "2. Dajaj", "3. Samak"], answer: 0 },
+            { q: "¿Cómo se dice 'Pollo' en árabe?", options: ["1. Dajaj (دَجَاج)", "2. Lahm", "3. Samak"], answer: 0 },
+            { q: "¿Cómo se dice 'Pescado' en árabe?", options: ["1. Samak (سَمَك)", "2. Dajaj", "3. Lahm"], answer: 0 },
+            { q: "¿Qué significa 'يَوْم' (Yawm)?", options: ["1. Día", "2. Semana", "3. Año"], answer: 0 },
+            { q: "¿Cómo se dice 'Hoy' en árabe?", options: ["1. Al-yawm (الْيَوْم)", "2. Ghadan", "3. Ams"], answer: 0 },
+            { q: "¿Cómo se dice 'Ayer' en árabe?", options: ["1. Ams (أَمْس)", "2. Ghadan", "3. Al-yawm"], answer: 0 },
+            { q: "¿Qué significa 'أُسْبُوع' (Usbu')?", options: ["1. Semana", "2. Mes", "3. Año"], answer: 0 },
+            { q: "¿Qué significa 'شَهْر' (Shahr)?", options: ["1. Mes", "2. Semana", "3. Hora"], answer: 0 },
+            { q: "¿Cómo se dice 'Año' en árabe?", options: ["1. Sana (سَنَة)", "2. Shahr", "3. Yawm"], answer: 0 },
+            { q: "¿Qué significa 'وَقْت' (Waqt)?", options: ["1. Tiempo", "2. Hora", "3. Dinero"], answer: 0 },
+            { q: "¿Qué significa 'سَاعَة' (Sa'a)?", options: ["1. Hora / Reloj", "2. Tiempo", "3. Día"], answer: 0 },
+            { q: "¿Cómo se dice 'Grande' en árabe?", options: ["1. Kabir (كَبِير)", "2. Saghir", "3. Jamil"], answer: 0 },
+            { q: "¿Cómo se dice 'Pequeño' en árabe?", options: ["1. Saghir (صَغِير)", "2. Kabir", "3. Jadid"], answer: 0 },
+            { q: "¿Qué significa 'جَمِيل' (Jamil)?", options: ["1. Bonito / Hermoso", "2. Nuevo", "3. Viejo"], answer: 0 },
+            { q: "¿Cómo se dice 'Nuevo' en árabe?", options: ["1. Jadid (جَدِيد)", "2. Qadim", "3. Kabir"], answer: 0 },
+            { q: "¿Cómo se dice 'Viejo' en árabe?", options: ["1. Qadim (قَدِيم)", "2. Jadid", "3. Sahl"], answer: 0 },
+            { q: "¿Qué significa 'قَرِيب' (Qarib)?", options: ["1. Cerca", "2. Lejos", "3. Fácil"], answer: 0 },
+            { q: "¿Qué significa 'بَعِيد' (Ba'id)?", options: ["1. Lejos", "2. Cerca", "3. Difícil"], answer: 0 },
+            { q: "¿Cómo se dice 'Bueno' en árabe?", options: ["1. Jayyid (جَيِّد)", "2. Sayyi'", "3. Sahl"], answer: 0 },
+            { q: "¿Cómo se dice 'Malo' en árabe?", options: ["1. Sayyi' (سَيِّئ)", "2. Jayyid", "3. Sa'b"], answer: 0 },
+            { q: "¿Qué significa 'سَهْل' (Sahl)?", options: ["1. Fácil", "2. Difícil", "3. Bueno"], answer: 0 },
+            { q: "¿Qué significa 'صَعْب' (Sa'b)?", options: ["1. Difícil", "2. Fácil", "3. Nuevo"], answer: 0 },
+            { q: "¿Cómo se dice 'Bolígrafo / Lápiz' en árabe?", options: ["1. Qalam (قَلَم)", "2. Kitab", "3. Mal"], answer: 0 },
+            { q: "¿Cómo se dice 'Coche' en árabe?", options: ["1. Sayyara (سَيَّارَة)", "2. Hafila", "3. Matar"], answer: 0 },
+            { q: "¿Qué es una 'حَافِلَة' (Hafila)?", options: ["1. Autobús", "2. Coche", "3. Casa"], answer: 0 },
+            { q: "¿Cómo se dice 'Dinero' en árabe?", options: ["1. Mal (مَال)", "2. 'Amal", "3. Qalam"], answer: 0 },
+            { q: "¿Qué significa 'عَمَل' ('Amal)?", options: ["1. Trabajo", "2. Dinero", "3. Escuela"], answer: 0 },
+            { q: "¿Qué verbo es 'شَرِبَ' (Shariba)?", options: ["1. Beber", "2. Comer", "3. Venir"], answer: 0 },
+            { q: "¿Qué verbo es 'ذَهَبَ' (Dhahaba)?", options: ["1. Ir", "2. Venir", "3. Saber"], answer: 0 },
+            { q: "¿Qué verbo es 'جَاءَ' (Ja'a)?", options: ["1. Venir", "2. Ir", "3. Beber"], answer: 0 },
+            { q: "¿Qué significa el verbo 'عَرَفَ' ('Arafa)?", options: ["1. Saber / Conocer", "2. Comer", "3. Ir"], answer: 0 },
+            { q: "¿Cómo se dice el número 1 en árabe?", options: ["1. Wahid (وَاحِد)", "2. Ithnan", "3. Thalatha"], answer: 0 },
+            { q: "¿Cómo se dice el número 2 en árabe?", options: ["1. Ithnan (اِثْنَان)", "2. Wahid", "3. Arba'a"], answer: 0 }
         ];
 
         let currentQuizIndex = 0;

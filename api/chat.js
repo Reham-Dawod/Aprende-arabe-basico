@@ -1,12 +1,9 @@
-// api/chat.js
+// api/chat.js (Serverless Proxy para proteger la clave Gemini)
 export default async function handler(req, res) {
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    // Permitir CORS para peticiones desde cualquier origen
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-    );
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
@@ -16,19 +13,15 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Método no permitido' });
     }
 
+    // Lee la clave guardada en las variables de entorno de tu hosting
     const API_KEY = process.env.GEMINI_API_KEY; 
 
     if (!API_KEY) {
-        return res.status(500).json({ error: 'GEMINI_API_KEY no configurada en Vercel.' });
+        return res.status(500).json({ error: 'La variable GEMINI_API_KEY no está configurada.' });
     }
 
     try {
-        const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-        const { userQuery, history } = body || {};
-
-        if (!userQuery) {
-            return res.status(400).json({ error: 'Consulta vacía' });
-        }
+        const { userQuery, history } = req.body;
 
         const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
 Reglas de respuesta:
@@ -53,7 +46,7 @@ Reglas de respuesta:
         const data = await response.json();
 
         if (!response.ok) {
-            return res.status(response.status).json({ error: data.error?.message || 'Error en Gemini API' });
+            throw new Error(data.error?.message || 'Error al comunicarse con Gemini API');
         }
 
         const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se obtuvo respuesta.";
