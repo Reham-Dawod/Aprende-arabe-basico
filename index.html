@@ -931,7 +931,17 @@
         function getLessonAssistantResponse(msg) {
             const normMsg = normalizeText(msg);
 
-            // Saludos o estados de ánimo conversacionales
+            // 1. PRIORIDAD: Búsqueda de Números si la consulta trae algún dígito
+            const numberMatches = normMsg.match(/\d+/);
+            if (numberMatches) {
+                const val = parseInt(numberMatches[0]);
+                const numItem = fullNumbers.find(n => n.num === val);
+                if (numItem) {
+                    return `**Número encontrado en la lección:**\n\n* **Número:** ${numItem.num}\n* **Árabe:** ${numItem.ar}\n* **Pronunciación:** *${numItem.phonetic}*`;
+                }
+            }
+
+            // 2. Saludos o estados de ánimo
             if (/\b(hola|buenas|marhaban|saludos)\b/.test(normMsg)) {
                 return `¡Marhaban! (مَرْحَبًا). ¿Cómo estás? Soy **Teacher Reham**. Puedes preguntarme cualquier palabra en español o árabe de tu curso.`;
             }
@@ -940,15 +950,28 @@
                 return `¡Me alegra mucho escucharlo! 😊 Recuerda que estoy aquí para ayudarte a repasar el alfabeto, los números o cualquier palabra del diccionario.`;
             }
 
-            // Búsqueda de Vocabulario por límites léxicos exactos
+            // 3. Consultas generales sobre Alfabeto
+            if (/\b(alfabeto|letra|letras|alifato)\b/.test(normMsg)) {
+                const sample = fullAlphabet.slice(0, 5).map(a => `* **${a.letter}** (${a.name}): Sonido *${a.sound}*`).join('\n');
+                return `El alfabeto árabe cuenta con **28 letras**.\n\nAquí tienes las primeras 5 letras:\n${sample}\n\nPuedes consultar la lista completa en la sección **Lecciones**.`;
+            }
+
+            // 4. Consultas generales sobre Números
+            if (/\b(numero|numeros|contar)\b/.test(normMsg)) {
+                return `Las lecciones incluyen todos los **números del 1 al 100** con sus correspondientes nombres en árabe y fonética. Puedes ver la lista completa en la pestaña **Lecciones**.`;
+            }
+
+            // 5. Búsqueda de Vocabulario (Ignorando Stop Words como "el", "la", "de", "un")
+            const stopWords = ['el', 'la', 'los', 'las', 'un', 'una', 'es', 'de', 'en', 'se', 'dice', 'como', 'cual'];
+            
             const vocabMatch = vocabulary.find(item => {
                 const esNorm = normalizeText(item.spanish);
                 const phNorm = normalizeText(item.phonetic);
-                
-                // Extraer variantes de palabras en español (ej: "Bienvenido / Hola" -> ["bienvenido", "hola"])
+
                 const esVariants = esNorm.split(/[\/\,\;\(\)]+/).map(s => s.trim()).filter(Boolean);
 
                 const matchesSpanish = esVariants.some(variant => {
+                    if (stopWords.includes(variant)) return false; // Evita que "el" coincida con "Él"
                     const regex = new RegExp(`\\b${variant}\\b`, 'i');
                     return regex.test(normMsg);
                 });
@@ -961,27 +984,6 @@
 
             if (vocabMatch) {
                 return `**Resultado en la lección de vocabulario:**\n\n* **Árabe:** ${vocabMatch.arabic}\n* **Pronunciación:** *${vocabMatch.phonetic}*\n* **Español:** ${vocabMatch.spanish}\n* **Nota:** ${vocabMatch.context}`;
-            }
-
-            // Búsqueda de Números por valor exacto
-            const numberMatches = normMsg.match(/\d+/);
-            if (numberMatches) {
-                const val = parseInt(numberMatches[0]);
-                const numItem = fullNumbers.find(n => n.num === val);
-                if (numItem) {
-                    return `**Número encontrado en la lección:**\n\n* **Número:** ${numItem.num}\n* **Árabe:** ${numItem.ar}\n* **Pronunciación:** *${numItem.phonetic}*`;
-                }
-            }
-
-            // Consultas sobre Alfabeto
-            if (/\b(alfabeto|letra|letras|alifato)\b/.test(normMsg)) {
-                const sample = fullAlphabet.slice(0, 5).map(a => `* **${a.letter}** (${a.name}): Sonido *${a.sound}*`).join('\n');
-                return `El alfabeto árabe cuenta con **28 letras**.\n\nAquí tienes las primeras 5 letras:\n${sample}\n\nPuedes consultar la lista completa en la sección **Lecciones**.`;
-            }
-
-            // Consultas sobre Números
-            if (/\b(numero|numeros|contar)\b/.test(normMsg)) {
-                return `Las lecciones incluyen todos los **números del 1 al 100** con sus correspondientes nombres en árabe y fonética. Puedes ver la lista completa en la pestaña **Lecciones**.`;
             }
 
             return `No encontré esa expresión exacta en las lecciones actuales. Intenta preguntarme por una palabra en español o árabe (como *"agua"*, *"casa"*, *"gracias"*), un número del 1 al 100 o sobre el *"alfabeto"*.`;
