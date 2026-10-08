@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reham - Aprende Árabe Básico</title>
+    <!-- Tailwind CSS CDN con configuración silenciada para entorno web -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Marked.js para renderizar respuestas en Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        arabic: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .arabic-text { font-family: 'Cairo', sans-serif; direction: rtl; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.85);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        .dark ::-webkit-scrollbar-thumb { background: #334155; }
+        .prose p { margin-bottom: 0.5rem; }
+        .prose p:last-child { margin-bottom: 0; }
+        .prose ul { list-style-type: disc; padding-left: 1.25rem; margin-bottom: 0.5rem; }
+        .prose strong { color: inherit; font-weight: 700; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased transition-colors duration-200">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 glass-panel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="relative w-11 h-11 rounded-full overflow-hidden border-2 border-emerald-500 shadow-md">
+                    <img id="headerAvatar" src="REHAM  ريهام.jfif" alt="Reham - Profesor IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold text-lg\'>ر</div>';">
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold bg-gradient-to-r from-emerald-600 to-teal-600 dark:from-emerald-400 to-teal-400 bg-clip-text text-transparent flex items-center gap-1.5">
+                        <span>REHAM | ريهام</span>
+                        <span class="text-xs font-normal text-slate-500 dark:text-slate-400 border border-slate-300 dark:border-slate-700 rounded px-1.5 py-0.5">Teacher IA</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Aprende Árabe Básico</p>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <button onclick="switchTab('lessons')" id="tab-lessons" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50">
+                    <i class="fa-solid fa-book-open"></i> Lecciones
+                </button>
+                <button onclick="switchTab('flashcards')" id="tab-flashcards" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i class="fa-solid fa-clone"></i> Tarjetas
+                </button>
+                <button onclick="switchTab('quiz')" id="tab-quiz" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i class="fa-solid fa-circle-question"></i> Quiz
+                </button>
+                <button onclick="switchTab('dictionary')" id="tab-dictionary" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i class="fa-solid fa-book"></i> Diccionario
+                </button>
+                <button onclick="switchTab('ai-tutor')" id="tab-ai-tutor" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i class="fa-solid fa-wand-magic-sparkles text-emerald-500"></i> IA Tutor
+                </button>
+            </nav>
+
+            <!-- Stats & Theme Toggle -->
+            <div class="flex items-center space-x-3">
+                <div class="flex items-center gap-1.5 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-700 dark:text-amber-300">
+                    <i class="fa-solid fa-fire text-amber-500"></i>
+                    <span id="streakCount">1 d</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 px-2.5 py-1 rounded-full text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                    <i class="fa-solid fa-star text-amber-400"></i>
+                    <span id="xpCount">0 XP</span>
+                </div>
+                <button onclick="toggleDarkMode()" class="p-2 text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- 1. LECCIONES SECTION -->
+        <section id="sec-lessons" class="tab-content space-y-6">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10 max-w-xl">
+                    <span class="inline-block px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mb-2">Módulo 1: Fundamentos</span>
+                    <h2 class="text-2xl font-bold mb-1">¡Aprende Árabe con la Profesora Reham!</h2>
+                    <p class="text-emerald-100 text-sm mb-4">Domina el alfabeto, frases esenciales, saludos y dialectos con lecciones interactivas.</p>
+                    <div class="w-full bg-emerald-900/50 rounded-full h-2.5 overflow-hidden">
+                        <div id="progressBar" class="bg-amber-400 h-2.5 rounded-full transition-all duration-300" style="width: 15%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-language"></i></span>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">10 XP</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">El Alfabeto y Pronunciación</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende las primeras letras del alifato y los sonidos característicos del árabe.</p>
+                    <button onclick="startLesson('alphabet')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Iniciar Lección</button>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-comments"></i></span>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">15 XP</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Saludos y Cortesía</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende a saludar, presentarte y responder cortesmente en árabe clásico.</p>
+                    <button onclick="startLesson('greetings')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Iniciar Lección</button>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 hover:shadow-lg transition">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="p-2 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-lg text-lg"><i class="fa-solid fa-heart"></i></span>
+                        <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-1 rounded">20 XP</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-1">Expresiones Bonitas y Cariño</h3>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Aprende expresiones como Ya Habibi, Ya Omri, Ya Qalbi y más.</p>
+                    <button onclick="startLesson('affection')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-semibold text-sm transition">Iniciar Lección</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. FLASHCARDS SECTION -->
+        <section id="sec-flashcards" class="tab-content hidden max-w-xl mx-auto space-y-6">
+            <div class="text-center">
+                <h2 class="text-2xl font-bold mb-1">Tarjetas de Vocabulario</h2>
+                <p class="text-slate-500 dark:text-slate-400 text-sm">Practica la memoria y pronunciación con cada tarjeta.</p>
+            </div>
+
+            <div id="flashcard" onclick="flipCard()" class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 min-h-[260px] flex flex-col items-center justify-center text-center shadow-lg cursor-pointer transition-all transform hover:scale-[1.01] relative">
+                <div id="cardFront" class="space-y-3">
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Árabe</span>
+                    <h3 id="fcArabic" class="text-4xl font-bold arabic-text text-emerald-600 dark:text-emerald-400">مَرْحَبًا</h3>
+                    <p id="fcPhonetic" class="text-slate-500 dark:text-slate-400 text-lg font-medium">Marhaban</p>
+                </div>
+                <div id="cardBack" class="space-y-3 hidden">
+                    <span class="text-xs font-bold uppercase tracking-wider text-amber-500">Español</span>
+                    <h3 id="fcSpanish" class="text-2xl font-bold text-slate-800 dark:text-slate-100">Hola</h3>
+                    <p id="fcContext" class="text-xs text-slate-400">Saludo estándar común en todo el mundo árabe.</p>
+                </div>
+                <span class="absolute bottom-3 right-4 text-xs text-slate-400"><i class="fa-solid fa-rotate"></i> Toca para girar</span>
+            </div>
+
+            <div class="flex items-center justify-between gap-4">
+                <button onclick="prevCard()" class="flex-1 py-3 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 rounded-xl font-semibold text-sm transition"><i class="fa-solid fa-arrow-left mr-2"></i> Anterior</button>
+                <button onclick="speakText()" class="p-3 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 rounded-xl hover:bg-emerald-200 transition"><i class="fa-solid fa-volume-high text-lg"></i></button>
+                <button onclick="nextCard()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-semibold text-sm transition">Siguiente <i class="fa-solid fa-arrow-right ml-2"></i></button>
+            </div>
+        </section>
+
+        <!-- 3. QUIZ SECTION -->
+        <section id="sec-quiz" class="tab-content hidden max-w-2xl mx-auto space-y-6">
+            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-full">Pregunta <span id="quizNum">1</span> de 3</span>
+                    <span class="text-xs text-slate-400" id="quizScore">Puntos: 0</span>
+                </div>
+
+                <h3 id="quizQuestion" class="text-xl font-bold mb-6 text-slate-800 dark:text-slate-100">¿Qué significa la palabra "يا عُمري" (Ya Omri)?</h3>
+
+                <div id="quizOptions" class="space-y-3">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. DICTIONARY SECTION -->
+        <section id="sec-dictionary" class="tab-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                <div class="relative w-full sm:w-96">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400"></i>
+                    <input type="text" id="dictSearch" onkeyup="filterDict()" placeholder="Buscar en árabe, fonética o español..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
+                </div>
+                <span class="text-xs text-slate-400">Mostrando vocabulario de árabe básico</span>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-md">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 dark:bg-slate-700/50 text-xs font-bold text-slate-500 dark:text-slate-300 uppercase">
+                                <th class="p-4">Árabe</th>
+                                <th class="p-4">Pronunciación</th>
+                                <th class="p-4">Significado en Español</th>
+                                <th class="p-4 text-center">Audio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dictTableBody" class="divide-y divide-slate-200 dark:divide-slate-700 text-sm">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. AI TUTOR SECTION -->
+        <section id="sec-ai-tutor" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 shadow-md flex flex-col h-[650px]">
+                
+                <!-- Chat Header -->
+                <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-700">
+                    <div class="flex items-center space-x-3">
+                        <div class="relative w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-500">
+                            <img src="REHAM  ريهام.jfif" alt="Profesor IA Reham" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center font-bold\'>ر</div>';">
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-sm text-slate-800 dark:text-slate-100">REHAM | ريهام Teacher IA</h3>
+                            <p class="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> IA Activa y Lista
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-semibold px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
+                            <i class="fa-solid fa-bolt text-amber-500 mr-1"></i> Gemini 2.5 Flash
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Area -->
+                <div id="chatMessages" class="flex-1 overflow-y-auto py-4 space-y-4 pr-2">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
+                            <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
+                        </div>
+                        <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
+                            <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
+                            <p class="prose dark:prose-invert">¡Marhaban! (مَرْحَبًا). Soy tu profesora personal de árabe. La asistente de IA está lista. Puedes preguntarme cualquier duda sobre traducción, gramática o dialectos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Prompts -->
+                <div class="flex gap-2 overflow-x-auto py-2">
+                    <button onclick="sendQuickPrompt('¿Cómo se dice mi amor en árabe y cuál es la pronunciación correcta?')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">¿Cómo se dice "mi amor"?</button>
+                    <button onclick="sendQuickPrompt('Explícame la diferencia entre el árabe clásico y el dialecto marroquí (Darija).')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">Clásico vs Dialecto Marroquí</button>
+                    <button onclick="sendQuickPrompt('Dame 3 frases útiles para pedir comida en un restaurante árabe.')" class="text-xs bg-slate-100 dark:bg-slate-700 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 hover:text-emerald-600 rounded-full px-3 py-1.5 whitespace-nowrap transition">Frases para restaurante</button>
+                </div>
+
+                <!-- Chat Input Area -->
+                <div class="flex items-center gap-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+                    <input type="text" id="chatInput" onkeydown="if(event.key==='Enter') sendMessage()" placeholder="Hazle una pregunta sobre árabe a la profesora Reham..." class="flex-1 bg-slate-100 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <button onclick="sendMessage()" id="btnSend" class="p-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl transition flex items-center justify-center min-w-[42px]">
+                        <i class="fa-solid fa-paper-plane" id="sendIcon"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        const AUTO_GEMINI_KEY = window.GEMINI_API_KEY || "";
+
+        const SYSTEM_PROMPT = `Eres Reham (ريهام), una profesora nativa, experta y apasionada de lengua y cultura árabe. Tu objetivo es enseñar árabe básico de forma pedagógica, amigable, clara y respetuosa. 
+Reglas de respuesta:
+1. Responde siempre en español fluido.
+2. Cada vez que incluyas una palabra o frase en árabe, pon la escritura en alfabeto árabe (con vocalización diacrítica/harakat cuando sea útil), seguida inmediatamente de su transliteración/pronunciación en fonética latina entre paréntesis o cursiva, y su traducción al español.
+3. Si el usuario pregunta por dialectos (marroquí, egipcio, levantino), explica amablemente la diferencia con el Árabe Estándar Moderno (Fusha).
+4. Mantén un tono cálido, alentador y profesional.
+5. Utiliza formato Markdown con negritas y viñetas para que la explicación sea fácil de leer.`;
+
+        let chatHistory = [];
+        let currentTab = 'lessons';
+        let xp = parseInt(localStorage.getItem('reham_xp') || '0');
+        let streak = parseInt(localStorage.getItem('reham_streak') || '1');
+        let cardIndex = 0;
+        let isFlipped = false;
+
+        const vocabulary = [
+            { arabic: 'مَرْحَبًا', phonetic: 'Marhaban', spanish: 'Hola', context: 'Saludo formal y amigable común en todo el mundo árabe.' },
+            { arabic: 'أَهْلًا وَسَهْلًا', phonetic: 'Ahlan wa Sahlan', spanish: 'Bienvenido / Bienvenido seas', context: 'Expresión cálida de hospitalidad.' },
+            { arabic: 'شُكْرًا', phonetic: 'Shukran', spanish: 'Gracias', context: 'Palabra universal para dar las gracias.' },
+            { arabic: 'عَفْوًا', phonetic: 'Afwan', spanish: 'De nada / Por favor', context: 'Respuesta amable a Shukran.' },
+            { arabic: 'يا حَبيبي', phonetic: 'Ya Habibi', spanish: 'Mi amor (a hombre)', context: 'Expresión afectuosa masculina muy popular.' },
+            { arabic: 'يا حَبيبتي', phonetic: 'Ya Habibti', spanish: 'Mi amor (a mujer)', context: 'Expresión afectuosa femenina muy popular.' },
+            { arabic: 'يا عُمري', phonetic: 'Ya Omri', spanish: 'Mi vida', context: 'Demuestra afecto profundo ("eres mi vida").' },
+            { arabic: 'يا قَلبي', phonetic: 'Ya Qalbi', spanish: 'Mi corazón', context: 'Utilizado para expresar cariño sincero.' },
+            { arabic: 'نُور', phonetic: 'Nour', spanish: 'Luz / Resplandor', context: 'Nombre y concepto poético de guía y claridad.' },
+            { arabic: 'رِهَام', phonetic: 'Reham', spanish: 'Llovizna suave', context: 'Representa la lluvia fina y reconfortante.' }
+        ];
+
+        const quizQuestions = [
+            {
+                q: "¿Qué significa la expresión 'يا عُمري' (Ya Omri)?",
+                options: ["1. Mi corazón", "2. Mi vida", "3. Mi alma"],
+                answer: 1
+            },
+            {
+                q: "¿Cuál es la respuesta adecuada a 'Shukran' (شُكْرًا)?",
+                options: ["1. Afwan (عَفْوًا)", "2. Marhaban (مَرْحَبًا)", "3. Ahlan (أَهْلًا)"],
+                answer: 0
+            },
+            {
+                q: "¿Qué representa el nombre 'Reham' (رِهَام) en árabe?",
+                options: ["1. La luz del sol", "2. Llovizna suave y constante", "3. Una flor del desierto"],
+                answer: 1
+            }
+        ];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            renderFlashcard();
+            renderDictionary();
+            renderQuiz();
+        });
+
+        function switchTab(tabId) {
+            currentTab = tabId;
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`sec-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = 'nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800';
+            });
+            const activeBtn = document.getElementById(`tab-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = 'nav-btn px-3 py-2 rounded-lg text-sm font-semibold transition flex items-center gap-2 text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50';
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('xpCount').innerText = `${xp} XP`;
+            document.getElementById('streakCount').innerText = `${streak} d`;
+            localStorage.setItem('reham_xp', xp);
+            localStorage.setItem('reham_streak', streak);
+        }
+
+        function addXP(amount) {
+            xp += amount;
+            updateStats();
+        }
+
+        function renderFlashcard() {
+            const item = vocabulary[cardIndex];
+            document.getElementById('fcArabic').innerText = item.arabic;
+            document.getElementById('fcPhonetic').innerText = item.phonetic;
+            document.getElementById('fcSpanish').innerText = item.spanish;
+            document.getElementById('fcContext').innerText = item.context;
+
+            isFlipped = false;
+            document.getElementById('cardFront').classList.remove('hidden');
+            document.getElementById('cardBack').classList.add('hidden');
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                document.getElementById('cardFront').classList.add('hidden');
+                document.getElementById('cardBack').classList.remove('hidden');
+            } else {
+                document.getElementById('cardFront').classList.remove('hidden');
+                document.getElementById('cardBack').classList.add('hidden');
+            }
+        }
+
+        function nextCard() {
+            cardIndex = (cardIndex + 1) % vocabulary.length;
+            renderFlashcard();
+            addXP(2);
+        }
+
+        function prevCard() {
+            cardIndex = (cardIndex - 1 + vocabulary.length) % vocabulary.length;
+            renderFlashcard();
+        }
+
+        function speakText(text) {
+            const txt = text || vocabulary[cardIndex].arabic;
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(txt);
+                utterance.lang = 'ar-SA';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function renderDictionary() {
+            const tbody = document.getElementById('dictTableBody');
+            tbody.innerHTML = '';
+            vocabulary.forEach(v => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-50 dark:hover:bg-slate-700/30 transition';
+                tr.innerHTML = `
+                    <td class="p-4 font-bold text-lg arabic-text text-emerald-600 dark:text-emerald-400">${v.arabic}</td>
+                    <td class="p-4 font-medium text-slate-600 dark:text-slate-300">${v.phonetic}</td>
+                    <td class="p-4 text-slate-800 dark:text-slate-100">${v.spanish}</td>
+                    <td class="p-4 text-center">
+                        <button onclick="speakText('${v.arabic}')" class="p-2 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 rounded-lg transition"><i class="fa-solid fa-volume-high"></i></button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function filterDict() {
+            const query = document.getElementById('dictSearch').value.toLowerCase();
+            const rows = document.querySelectorAll('#dictTableBody tr');
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        function renderQuiz() {
+            const q = quizQuestions[currentQuizIndex];
+            document.getElementById('quizNum').innerText = currentQuizIndex + 1;
+            document.getElementById('quizScore').innerText = `Puntos: ${quizScore}`;
+            document.getElementById('quizQuestion').innerText = q.q;
+
+            const optsContainer = document.getElementById('quizOptions');
+            optsContainer.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.onclick = () => checkAnswer(idx);
+                btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emerald-500 dark:hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 font-medium transition';
+                btn.innerText = opt;
+                optsContainer.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx) {
+            const q = quizQuestions[currentQuizIndex];
+            if (idx === q.answer) {
+                quizScore += 10;
+                addXP(10);
+                alert("¡Excelente! Respuesta Correcta (+10 XP)");
+            } else {
+                alert("Respuesta incorrecta. ¡Sigue practicando!");
+            }
+            currentQuizIndex = (currentQuizIndex + 1) % quizQuestions.length;
+            renderQuiz();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const userMsg = input.value.trim();
+            if (!userMsg) return;
+
+            const chatBox = document.getElementById('chatMessages');
+            
+            chatBox.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="bg-emerald-600 text-white p-3.5 rounded-2xl rounded-tr-none max-w-xl text-sm shadow-sm">
+                        ${escapeHtml(userMsg)}
+                    </div>
+                </div>
+            `;
+            input.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            const loadingId = 'loading-' + Date.now();
+            chatBox.innerHTML += `
+                <div id="${loadingId}" class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
+                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
+                    </div>
+                    <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm flex items-center gap-2 text-slate-500">
+                        <i class="fa-solid fa-circle-notch fa-spin text-emerald-600"></i>
+                        <span>Reham está procesando tu respuesta...</span>
+                    </div>
+                </div>
+            `;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            let replyText = "";
+
+            if (AUTO_GEMINI_KEY && AUTO_GEMINI_KEY !== "") {
+                try {
+                    replyText = await fetchGeminiResponse(userMsg, AUTO_GEMINI_KEY);
+                } catch (error) {
+                    console.log("Servicio en vivo activando fallback:", error);
+                    await new Promise(r => setTimeout(r, 400));
+                    replyText = getSmartFallbackResponse(userMsg);
+                }
+            } else {
+                await new Promise(r => setTimeout(r, 400));
+                replyText = getSmartFallbackResponse(userMsg);
+            }
+
+            const loadingElem = document.getElementById(loadingId);
+            if (loadingElem) loadingElem.remove();
+
+            const renderedHtml = marked.parse(replyText);
+            chatBox.innerHTML += `
+                <div class="flex items-start space-x-3">
+                    <div class="w-8 h-8 rounded-full overflow-hidden border border-emerald-500 flex-shrink-0">
+                        <img src="REHAM  ريهام.jfif" alt="Reham IA" class="w-full h-full object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\'w-full h-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold\'>ر</div>';">
+                    </div>
+                    <div class="bg-slate-100 dark:bg-slate-700/60 p-3.5 rounded-2xl rounded-tl-none max-w-xl text-sm space-y-1">
+                        <p class="font-bold text-xs text-emerald-600 dark:text-emerald-400">REHAM | ريهام Teacher IA</p>
+                        <div class="prose dark:prose-invert text-slate-800 dark:text-slate-100 text-sm">
+                            ${renderedHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+            chatBox.scrollTop = chatBox.scrollHeight;
+            addXP(1);
+        }
+
+        async function fetchGeminiResponse(userQuery, apiKey) {
+            chatHistory.push({ role: "user", parts: [{ text: userQuery }] });
+
+            const contents = [
+                {
+                    role: "user",
+                    parts: [{ text: SYSTEM_PROMPT }]
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "¡Comprendido! Asumo mi rol como la Profesora Reham. Responderé con claridad, calidez y formato estructurado en árabe, fonética y español." }]
+                },
+                ...chatHistory.slice(-8)
+            ];
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ contents: contents })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP Error ${response.status}`);
+            }
+
+            const data = await response.json();
+            const textResult = data.candidates?.[0]?.content?.parts?.[0]?.text || "No se pudo obtener la respuesta.";
+
+            chatHistory.push({ role: "model", parts: [{ text: textResult }] });
+
+            return textResult;
+        }
+
+        function getSmartFallbackResponse(msg) {
+            const lower = msg.toLowerCase();
+            if (lower.includes('amor') || lower.includes('habibi') || lower.includes('cariño')) {
+                return `En árabe existen varias expresiones hermosas para transmitir cariño:\n\n* **يا حَبيبي** (*Ya Habibi*) — "Mi amor" (dirigido a un hombre).\n* **يا حَبيبتي** (*Ya Habibti*) — "Mi amor" (dirigido a una mujer).\n* **يا عُمري** (*Ya 'Omri*) — "Mi vida".\n* **يا قَلبي** (*Ya Qalbi*) — "Mi corazón".\n\n💡 *Variante poética:* **يا نُور عَيْني** (*Ya Nur 'Ayni*), que significa *"Luz de mis ojos"*.`;
+            } else if (lower.includes('gracias') || lower.includes('de nada')) {
+                return `Para dar las gracias se utiliza **شُكْرًا** (*Shukran*) y para responder "de nada" se dice **عَفْوًا** (*'Afwan*).\n\nSi quieres dar un agradecimiento más formal o profundo, puedes decir **شُكْرًا جَزيلاً** (*Shukran Jazeelan*) — *"Muchas gracias"*.`;
+            } else if (lower.includes('restaurante') || lower.includes('comida')) {
+                return `Frases esenciales para un restaurante árabe:\n\n1. **أُاريدُ هَذا مِنْ فَضْلِك** (*Ureedu hadha min fadlik*) — *"Quiero esto, por favor"*.\n2. **القَائِمَة مِنْ فَضْلِك** (*Al-qa'imah min fadlik*) — *"La carta/menú, por favor"*.\n3. **الحِساب مِنْ فَضْلِك** (*Al-hisab min fadlik*) — *"La cuenta, por favor"*.`;
+            } else if (lower.includes('marroqui') || lower.includes('darija') || lower.includes('clasico') || lower.includes('dialecto')) {
+                return `El árabe clásico o Árabe Estándar Moderno (**Fusha / الفصحى**) es la lengua oficial utilizada en libros, noticias y educación en todo el mundo árabe.\n\nPor otro lado, el **Darija (الدارجة)** es el dialecto hablado cotidiano en Marruecos, con fuerte influencia del amazigh (bereber), francés y español.`;
+            } else {
+                return `¡Excelente pregunta! En árabe clásico (Fusha) es muy importante la pronunciación correcta de los sonidos vocálicos. ¿Quieres practicar algún vocabulario o frase en específico con la Profesora Reham?`;
+            }
+        }
+
+        function sendQuickPrompt(promptText) {
+            document.getElementById('chatInput').value = promptText;
+            sendMessage();
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        }
+
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function startLesson(lessonKey) {
+            switchTab('flashcards');
+        }
+    </script>
+</body>
+</html>
